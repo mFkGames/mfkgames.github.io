@@ -1,11 +1,10 @@
-# mFk
+# mFk Games | Legal Documents
 
-Privacy policy and legal pages
+Welcome to the public repository for **mFk** mobile game legal compliance documents. This repository is primarily used to host live legal pages via GitHub Pages for mobile store requirements.
 
-⚠ This repository is published for transparency purposes only.
+## 📄 Available Documents
+* `privacy-policy.html` — Privacy Policy
+* `terms-of-service.html` — Terms of Service
 
-Casual mobile game project.
-
-This repository contains legal and public information related to the project.
-
-Internal project identifier: mFk-Bubble-2026
+---
+⚠️ *This repository is published for transparency and public hosting purposes only.* **Internal Ref:** `mFk-Bubble-2026`
