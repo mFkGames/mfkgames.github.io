@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mfkgames.github.io/sitemap.xml
