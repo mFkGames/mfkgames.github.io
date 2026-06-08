@@ -19,4 +19,4 @@ We take reasonable measures to protect user data.
 Users may request data deletion or access by contacting us.
 
 ## Contact
-For privacy questions, contact: your@email.com
+For privacy questions, contact: mfkgames.support@gmail.com
