@@ -7,7 +7,7 @@
     <meta name="google-site-verification" content="bzR5p9U7_C7qeLzEymNvsMtvL_5hWT2BOrcAg_utKmI" />
     <meta name="description" content="mFk Games: Mobil platformlar için 2D-3D piksel art tarzında retro oyunlar geliştiren bağımsız bir indie oyun geliştiricisi. Eğlenceli ve her yaşa uygun mobil oyunlar.">
 
-    <!-- ── SOSYAL MEDYA / LINK ÖNİZLEME ── -->
+    <!-- ── SOSYAL MEDYA / LINK ÖNİZLEME (X, WhatsApp, LinkedIn vb.) ── -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mfkgames.github.io/">
     <meta property="og:title" content="mFk Games — Bağımsız Mobil Oyun Geliştiricisi" id="ogTitle">
@@ -21,9 +21,9 @@
     <meta name="twitter:description" content="Mobil platformlar için retro tarzda oyunlar geliştiren bağımsız indie oyun geliştiricisi." id="twDesc">
     <meta name="twitter:image" content="https://mfkgames.github.io/og-image.png">
 
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="apple-touch-icon" href="favicon.png">
+    <!-- ── FAVICON ── -->
+    <link rel="icon" type="image/png" sizes="32x32" href="https://mfkgames.github.io/favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://mfkgames.github.io/favicon.png">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZEW07PZZ1"></script>
@@ -179,7 +179,7 @@
             align-items: flex-start;
         }
 
-        /* 1. BAŞLIK: ▶ OYUN GELİŞTİRİCİ ROZETİ (YUKARI ALINDI VE ARALIK ARTIRILDI) */
+        /* 1. BAŞLIK: ▶ OYUN GELİŞTİRİCİ ROZETİ */
         .pixel-badge {
             font-family: 'Press Start 2P', monospace;
             font-size: 9.5px;
@@ -190,18 +190,18 @@
             border-radius: 5px;
             letter-spacing: 0.6px;
             margin-top: -6px;
-            margin-bottom: 28px; /* Başlıktan daha yukarıda ayrıldı */
+            margin-bottom: 28px;
             display: inline-flex;
             align-items: center;
             gap: 8px;
         }
 
-        /* 2. BAŞLIK: mFk Games (ALT VE ÜST ARALIĞI RAHATLATILDI) */
+        /* 2. BAŞLIK: mFk Games */
         .hero-title {
             font-family: 'Press Start 2P', monospace;
             font-size: clamp(36px, 4.5vw, 60px);
             line-height: 1.25;
-            margin-bottom: 24px; /* Alt başlıkla arası açıldı */
+            margin-bottom: 24px;
             color: #ffffff;
             letter-spacing: -1.5px;
             text-shadow: 3px 3px 0 rgba(0,0,0,0.9);
@@ -217,11 +217,10 @@
             font-size: 20px;
             font-weight: 500;
             color: #f1f5f9;
-            margin-bottom: 24px; /* Açıklama ile arası açıldı */
+            margin-bottom: 24px;
             letter-spacing: -0.2px;
         }
 
-        /* AÇIKLAMA METNİ */
         .hero-desc {
             font-size: 16px;
             line-height: 1.8;
@@ -230,7 +229,7 @@
             margin-bottom: 34px;
         }
 
-        /* ── YAN YANA VE DOLGUN BUTONLAR ── */
+        /* ── YAN YANA DOLGUN BUTONLAR ── */
         .hero-buttons {
             display: flex;
             align-items: center;
@@ -455,7 +454,7 @@
             background: #0e121d;
             box-shadow: 0 18px 40px rgba(0, 0, 0, 0.95);
             cursor: pointer;
-            transition: all 0.7s cubic-bezier(0.2, 0.8, 0.2, 1);
+            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
             display: flex;
             flex-direction: column;
             text-decoration: none;
@@ -845,7 +844,7 @@
             <div class="ghost-screen ghost-screen-2"></div>
             <div class="ghost-screen ghost-screen-3"></div>
 
-            <!-- 1. Ekran (Üst Slot - Mavi/Cyan Neon) -->
+            <!-- 1. Ekran (Üst Slot) -->
             <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="arcade-screen slot-top" id="screenTop">
                 <div class="screen-hud-top">
                     <div class="hud-left">
@@ -866,7 +865,7 @@
                 </div>
             </a>
 
-            <!-- 2. Ekran (Alt Slot - Pembe/Mor Neon) -->
+            <!-- 2. Ekran (Alt Slot) -->
             <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="arcade-screen slot-bottom" id="screenBottom">
                 <div class="screen-hud-top">
                     <div class="hud-left">
@@ -887,7 +886,7 @@
                 </div>
             </a>
 
-            <!-- 3. Ekran (Merkez Slot - Canlı Yeşil Neon, En Önde Duran) -->
+            <!-- 3. Ekran (Merkez Slot) -->
             <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="arcade-screen slot-center" id="screenCenter">
                 <div class="screen-hud-top">
                     <div class="hud-left">
@@ -1034,8 +1033,9 @@ var fallbackGames = [
 ];
 
 var loadedGames = fallbackGames;
-var currentOffset = 0;
+var currentTopIndex = 0;
 
+// ads.json dosyasından canlı okuma
 fetch('ads.json')
   .then(function(res) { return res.json(); })
   .then(function(data) {
@@ -1049,24 +1049,7 @@ fetch('ads.json')
       syncGamesToShowcase();
   });
 
-function populateScreen(screenEl, titleEl, iconEl, badgeEl, game) {
-    screenEl.href = "https://play.google.com/store/apps/details?id=" + game.pkg;
-    titleEl.textContent = game.title.toUpperCase();
-    titleEl.setAttribute('title', game.title);
-    iconEl.src = game.icon;
-}
-
-function syncGamesToShowcase() {
-    var len = loadedGames.length;
-    var gTop = loadedGames[currentOffset % len];
-    var gCenter = loadedGames[(currentOffset + 1) % len];
-    var gBottom = loadedGames[(currentOffset + 2) % len];
-
-    populateScreen(document.getElementById('screenTop'), document.getElementById('titleTop'), document.getElementById('iconTop'), document.getElementById('badgeTop'), gTop);
-    populateScreen(document.getElementById('screenCenter'), document.getElementById('titleCenter'), document.getElementById('iconCenter'), document.getElementById('badgeCenter'), gCenter);
-    populateScreen(document.getElementById('screenBottom'), document.getElementById('titleBottom'), document.getElementById('iconBottom'), document.getElementById('badgeBottom'), gBottom);
-}
-
+// ── KUTULARA VERİYİ SENKRONİZE VE KESİN BAĞLAMA ──
 var screens = [
     document.getElementById('screenTop'),
     document.getElementById('screenCenter'),
@@ -1076,19 +1059,46 @@ var screens = [
 var slotClasses = ['slot-top', 'slot-center', 'slot-bottom'];
 var currentRotationStep = 0;
 
-function rotateShowcase() {
-    currentRotationStep = (currentRotationStep + 1) % 3;
+function syncGamesToShowcase() {
+    if (!loadedGames || loadedGames.length === 0) return;
+    var len = loadedGames.length;
 
+    // 3 slota karşılık gelen oyunları doğrudan belirle
+    var slotGames = [
+        loadedGames[currentTopIndex % len],
+        loadedGames[(currentTopIndex + 1) % len],
+        loadedGames[(currentTopIndex + 2) % len]
+    ];
+
+    screens.forEach(function(sc, idx) {
+        var game = slotGames[idx];
+        var titleEl = sc.querySelector('.arcade-title');
+        var iconEl = sc.querySelector('.game-icon-img');
+        
+        // Link, İsim ve Resmi KESİNLİKLE aynı anda güncelle
+        sc.href = "https://play.google.com/store/apps/details?id=" + game.pkg;
+        titleEl.textContent = game.title.toUpperCase();
+        titleEl.setAttribute('title', game.title);
+        iconEl.src = game.icon;
+        iconEl.alt = game.title;
+    });
+}
+
+function rotateShowcase() {
+    // 1. Kutuların slot pozisyonlarını döndür
+    currentRotationStep = (currentRotationStep + 1) % 3;
     screens.forEach(function(sc, idx) {
         var sIndex = (idx + currentRotationStep) % 3;
         sc.classList.remove('slot-top', 'slot-center', 'slot-bottom');
         sc.classList.add(slotClasses[sIndex]);
     });
 
-    currentOffset = (currentOffset + 1) % loadedGames.length;
-    setTimeout(syncGamesToShowcase, 350);
+    // 2. Oyun sırasını 1 adım kaydır ve tam uyumlu güncelle
+    currentTopIndex = (currentTopIndex + 1) % loadedGames.length;
+    syncGamesToShowcase();
 }
 
+// 3.8 saniyede bir senkronize dönüş
 var rotateInterval = setInterval(rotateShowcase, 3800);
 
 screens.forEach(function(sc) {
