@@ -108,6 +108,12 @@
     "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.limitarea.png"
   },
   {
+    "title": "LiquidLab",
+    "pkg": "com.mfk.liquidlab",
+    "category": "oyun",
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.liquidlab.png"
+  },
+  {
     "title": "Locked",
     "pkg": "com.mfk.locked",
     "category": "oyun",
@@ -115,15 +121,9 @@
   },
   {
     "title": "LullaBaby",
-    "pkg": "com.mfk.LullaBaby",
+    "pkg": "com.mfk.lullababy",
     "category": "aile",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.LullaBaby.png"
-  },
-  {
-    "title": "LiquidLab",
-    "pkg": "com.mfk.liquidlab",
-    "category": "oyun",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.liquidlab.png"
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.lullababy.png"
   },
   {
     "title": "MazeRush",
@@ -247,9 +247,9 @@
   },
   {
     "title": "Sky Defender",
-    "pkg": "com.mfk.SkyDefender",
+    "pkg": "com.mfk.skydefender",
     "category": "oyun",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.SkyDefender.png"
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.skydefender.png"
   },
   {
     "title": "Sky Strike",
@@ -259,9 +259,9 @@
   },
   {
     "title": "Smart Remote",
-    "pkg": "com.mfk.SmartRemote",
+    "pkg": "com.mfk.smartremote",
     "category": "arac",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.SmartRemote.png"
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.smartremote.png"
   },
   {
     "title": "SuperCar",
@@ -276,10 +276,16 @@
     "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.timeloock.png"
   },
   {
-    "title": "Türkiye Keşif",
-    "pkg": "com.mfk.turkiyekesif",
-    "category": "genel",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.turkiyekesif.png"
+    "title": "TownCraft",
+    "pkg": "com.mfk.towncraft",
+    "category": "oyun",
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.towncraft.png"
+  },
+  {
+    "title": "Trevion",
+    "pkg": "com.mfk.trevion",
+    "category": "oyun",
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.trevion.png"
   },
   {
     "title": "Troll",
@@ -289,20 +295,26 @@
   },
   {
     "title": "TurfWars",
-    "pkg": "com.mfk.TurfWars",
+    "pkg": "com.mfk.turfwars",
     "category": "oyun",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.TurfWars.png"
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.turfwars.png"
   },
   {
-    "title": "Void Runner",
-    "pkg": "com.mfk.VoidRunner",
-    "category": "oyun",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.VoidRunner.png"
+    "title": "Türkiye Keşif",
+    "pkg": "com.mfk.turkiyekesif",
+    "category": "genel",
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.turkiyekesif.png"
   },
   {
     "title": "Void Crawler",
     "pkg": "com.mfk.voidcrawler",
     "category": "oyun",
     "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.voidcrawler.png"
+  },
+  {
+    "title": "Void Runner",
+    "pkg": "com.mfk.voidrunner",
+    "category": "oyun",
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.voidrunner.png"
   }
 ]
