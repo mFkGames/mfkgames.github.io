@@ -7,19 +7,24 @@
     <meta name="google-site-verification" content="bzR5p9U7_C7qeLzEymNvsMtvL_5hWT2BOrcAg_utKmI" />
     <meta name="description" content="mFk Games: Mobil platformlar için 2D-3D piksel art tarzında retro oyunlar geliştiren bağımsız bir indie oyun geliştiricisi. Eğlenceli ve her yaşa uygun mobil oyunlar.">
 
-    <!-- ── SOSYAL MEDYA / LINK ÖNİZLEME ── -->
+    <!-- ── TWITTER & SOSYAL MEDYA KARTLARI (TAM URL İLE DÜZELTİLDİ) ── -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@mfkgamesstudio">
+    <meta name="twitter:creator" content="@mfkgamesstudio">
+    <meta name="twitter:title" content="mFk Games — Bağımsız Mobil Oyun Geliştiricisi">
+    <meta name="twitter:description" content="Mobil platformlar için retro indie oyunlar geliştiren bağımsız geliştirici.">
+    <meta name="twitter:image" content="https://mfkgames.github.io/og-image.png">
+
+    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://mfkgames.github.io/">
-    <meta property="og:title" content="mFk Games — Bağımsız Mobil Oyun Geliştiricisi" id="ogTitle">
-    <meta property="og:description" content="Mobil platformlar için retro tarzda oyunlar geliştiren bağımsız indie oyun geliştiricisi." id="ogDesc">
+    <meta property="og:title" content="mFk Games — Bağımsız Mobil Oyun Geliştiricisi">
+    <meta property="og:description" content="Mobil platformlar için retro indie oyunlar geliştiren bağımsız geliştirici.">
     <meta property="og:image" content="https://mfkgames.github.io/og-image.png">
+    <meta property="og:image:secure_url" content="https://mfkgames.github.io/og-image.png">
+    <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="mFk Games — Bağımsız Mobil Oyun Geliştiricisi" id="twTitle">
-    <meta name="twitter:description" content="Mobil platformlar için retro tarzda oyunlar geliştiren bağımsız indie oyun geliştiricisi." id="twDesc">
-    <meta name="twitter:image" content="https://mfkgames.github.io/og-image.png">
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="https://mfkgames.github.io/favicon.png">
@@ -156,7 +161,7 @@
             color: #fff;
         }
 
-        /* ── HERO DÜZENİ (MASAÜSTÜ) ── */
+        /* ── HERO DÜZENİ ── */
         .hero {
             position: relative;
             z-index: 2;
@@ -660,9 +665,7 @@
         }
         footer a:hover { color: #fff; }
 
-        /* ════════════════════════════════════════════════
-           ── MOBİL İÇİN DÜZELTMELER (İSTENEN ÖZEL AYARLAR) ──
-           ════════════════════════════════════════════════ */
+        /* ── MOBİL UYARLAMA ── */
         @media (max-width: 900px) {
             html, body {
                 height: auto;
@@ -693,24 +696,20 @@
                 font-size: 16px;
                 margin-bottom: 16px;
             }
-            
-            /* Başlık/Metin ile Butonlar Arasında Ferah Boşluk */
             .hero-desc {
                 font-size: 14px;
                 line-height: 1.65;
                 margin-left: auto;
                 margin-right: auto;
-                margin-bottom: 34px; /* Butonlarla arayı açan boşluk */
+                margin-bottom: 34px;
                 max-width: 92%;
             }
-
-            /* Mobilde Çok Yer Kaplamayan Kompakt 2x2 Buton Düzeni */
             .hero-buttons {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
                 width: 100%;
-                max-width: 300px; /* Fazla yayılmasını engelledik */
+                max-width: 300px;
                 margin: 0 auto;
                 flex-wrap: wrap;
             }
@@ -718,7 +717,7 @@
                 width: 100%;
                 height: 38px;
                 padding: 0 8px;
-                font-size: 7px; /* Daha kibar buton boyutu */
+                font-size: 7px;
                 gap: 5px;
                 border-radius: 6px;
             }
@@ -749,14 +748,13 @@
                 margin: 0 auto;
             }
 
-            /* Mobilde Footer: Kesinlikle Tek Satır & Kibar */
             footer {
                 padding: 10px 10px;
                 padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
             }
             footer p {
-                font-size: 8.5px; /* Küçültüldü */
-                white-space: nowrap; /* Tek satıra kilitlendi */
+                font-size: 8.5px;
+                white-space: nowrap;
                 letter-spacing: -0.2px;
             }
             footer a {
@@ -765,18 +763,10 @@
         }
 
         @media (max-width: 380px) {
-            .hero-title {
-                font-size: 26px;
-            }
-            .hero-buttons {
-                max-width: 280px;
-            }
-            .btn-modern {
-                font-size: 6.5px;
-            }
-            footer p {
-                font-size: 7.5px; /* Küçük telefonlarda da tek satır kalması için */
-            }
+            .hero-title { font-size: 26px; }
+            .hero-buttons { max-width: 280px; }
+            .btn-modern { font-size: 6.5px; }
+            footer p { font-size: 7.5px; }
         }
     </style>
 </head>
@@ -785,7 +775,7 @@
 <div class="cyber-bg"></div>
 <canvas id="particleCanvas"></canvas>
 
-<!-- ── SAĞ ÜST DİL ÇUBUĞU (🌐 TR) ── -->
+<!-- ── DİL ÇUBUĞU ── -->
 <div class="lang-bar">
     <div class="lang-wrapper">
         <button class="lang-toggle" id="langBtn">
@@ -810,7 +800,6 @@
 <!-- ── HERO ALANI ── -->
 <main class="hero">
 
-    <!-- Sol Bölüm: Başlık, Açıklama ve Butonlar -->
     <div class="hero-left">
         <div class="pixel-badge" id="el-badge">▶ OYUN GELİŞTİRİCİ</div>
         <h1 class="hero-title">mFk <span>Games</span></h1>
@@ -819,7 +808,6 @@
             Mobil platformlar için eğlenceli, sade ve her yaşa uygun oyunlar geliştiriyorum. Tasarımdan kodlamaya tüm süreci üstleniyor, 2D-3D piksel art tarzındaki retro projelerimle nostaljik bir indie oyun deneyimi sunuyorum.
         </p>
 
-        <!-- Butonlar -->
         <div class="hero-buttons">
             <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="btn-modern btn-play">
                 <svg viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
@@ -965,7 +953,7 @@
 
 </main>
 
-<!-- ── TEK SATIR LİSANS VE FOOTER ALANI ── -->
+<!-- ── FOOTER ── -->
 <footer>
     <p>© 2026 mFk Games — <span id="el-copyright">Tüm hakları saklıdır.</span>
     <span style="opacity: 0.3; margin: 0 4px;">|</span>
@@ -1163,7 +1151,7 @@ var i18n = {
     es: { label: "ES", badge: "▶ JUGADOR UNO", heroSub: "Desarrollador de Juegos", heroDesc: "Desarrollador independiente de juegos móviles. Me encanta crear experiencias divertidas y simples para todas las edades.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Enlaces", btnContact: "Contacto", privacy: "Política de privacidad", terms: "Términos del servicio", copyright: "Todos los derechos reservados.", dir: "ltr" },
     it: { label: "IT", badge: "▶ GIOCATORE UNO", heroSub: "Sviluppatore di Giochi", heroDesc: "Sviluppatore indipendente di giochi mobile. Amo creare experiences divertenti e semplici per tutte le età.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Link", btnContact: "Contatti", privacy: "Informativa sulla privacy", terms: "Termini di servizio", copyright: "Tutti i diritti riservati.", dir: "ltr" },
     pt: { label: "PT", badge: "▶ JOGADOR UM", heroSub: "Desenvolvedor de Jogos", heroDesc: "Desenvolvedor independente de jogos mobile. Adoro criar experiências divertidas e simples para todas as idades.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Links", btnContact: "Contato", privacy: "Política de privacidade", terms: "Termos de serviço", copyright: "Todos os direitos reservados.", dir: "ltr" },
-    ru: { label: "RU", badge: "▶ ИГРОК ОДИН", heroSub: "Разработчик игр", heroDesc: "Независимый разработчик mobil oyunlar. Люблю создавать весёлые и простые игры для любого возраста.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Ссылки", btnContact: "Контакт", privacy: "Поlitika gizlilik", terms: "Kullanım Şartları", copyright: "Все права защищены.", dir: "ltr" },
+    ru: { label: "RU", badge: "▶ ИГРОК ОДИН", heroSub: "Разработчик игр", heroDesc: "Независимый разработчик mobil oyunlar. Люблю создавать весёлые и простые игры для любого возраста.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Ссылки", btnContact: "Контакт", privacy: "Политика конфиденциальности", terms: "Условия использования", copyright: "Все права защищены.", dir: "ltr" },
     ja: { label: "JP", badge: "▶ プレイヤーワン", heroSub: "ゲーム開発者", heroDesc: "モバイルゲームを開発するインディー開発者。楽しくシンプルな体験を提供します。", btnPlay: "Play", btnApple: "Apple", btnSocial: "リンク", btnContact: "お問い合わせ", privacy: "プライバシーポリシー", terms: "利用規約", copyright: "All rights reserved.", dir: "ltr" },
     ar: { label: "AR", badge: "▶ اللاعب الأول", heroSub: "مطور ألعاب", heroDesc: "مطور مستقل للألعاب المحmولة. أحب إنشاء تجارب ممتعة وبسيطة لجميع الأعمار.", btnPlay: "Play", btnApple: "Apple", btnSocial: "روابط", btnContact: "تواصل", privacy: "سياسة الخصوصية", terms: "شروط الخدمة", copyright: "جميع الحقوق محفوظة.", dir: "rtl" }
 };
