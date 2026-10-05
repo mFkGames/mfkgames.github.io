@@ -461,7 +461,16 @@ function fixPkg(p){
   var m=/^com\.mfk\.(.+)$/.exec(p||'');
   return (m&&PKG_CASE[m[1].toLowerCase()])?'com.mfk.'+PKG_CASE[m[1].toLowerCase()]:(p||'');
 }
-function fillCard(sc,game){
+var PALETTE=[
+  {c:'#25f488',g:'rgba(37,244,136,.5)'},  // yeşil
+  {c:'#00d2ff',g:'rgba(0,210,255,.4)'},   // mavi
+  {c:'#ff2a85',g:'rgba(255,42,133,.4)'},  // kırmızı
+  {c:'#f5c518',g:'rgba(245,197,24,.4)'},  // sarı
+  {c:'#b537f2',g:'rgba(181,55,242,.4)'}   // mor
+];
+function fillCard(sc,game,gi){
+  var pc=PALETTE[(gi||0)%PALETTE.length];
+  sc.style.setProperty('--c',pc.c);sc.style.setProperty('--glow',pc.g);
   var img=sc.querySelector('.game-icon-img'),title=sc.querySelector('.arcade-title');
   sc.href=game.url||game.link||game.playUrl||game.storeUrl||(game.pkg?'https://play.google.com/store/apps/details?id='+fixPkg(game.pkg):'https://play.google.com/store/apps/developer?id=mFk+Games');
   title.textContent=game.title.toUpperCase();
@@ -498,7 +507,7 @@ function rotateShowcase(){
     sc._pos=(sc._pos+2)%3;            // ön→arka, orta→ön, arka→orta
     paintCard(sc);
     if(wraps){
-      var g=loadedGames[nextIdx++%loadedGames.length];
+      var gi=nextIdx++;var g=loadedGames[gi%loadedGames.length];
       var nx=loadedGames[nextIdx%loadedGames.length];
       if(nx&&nx.icon){new Image().src=nx.icon}
       sc.classList.add('swap','flying');
@@ -509,7 +518,7 @@ function rotateShowcase(){
           {translate:'0 0',rotate:'0deg',scale:'1',offset:1}
         ],{duration:650,easing:'ease-in-out'});
       }
-      setTimeout(function(){fillCard(sc,g);sc.classList.remove('swap')},300);
+      setTimeout(function(){fillCard(sc,g,gi);sc.classList.remove('swap')},300);
       setTimeout(function(){sc.classList.remove('flying')},650);
     }
   });
@@ -642,7 +651,7 @@ window.addEventListener('resize',function(){if(!consentBox.hidden)showConsent()}
 var initPos=[2,0,1];
 cards.forEach(function(sc,i){
   sc._pos=initPos[i];
-  fillCard(sc,loadedGames[sc._pos]);
+  fillCard(sc,loadedGames[sc._pos],sc._pos);
   sc.addEventListener('click',startRotation);
 });
 
@@ -663,7 +672,7 @@ fetch('ads.json')
     var f=d.filter(function(x){return x.category==='oyun'&&x.pkg&&x.title});
     if(f.length>=3){
       loadedGames=f;nextIdx=3;
-      cards.forEach(function(sc){fillCard(sc,loadedGames[sc._pos])});
+      cards.forEach(function(sc){fillCard(sc,loadedGames[sc._pos],sc._pos)});
     }
   })
   .catch(function(){});
