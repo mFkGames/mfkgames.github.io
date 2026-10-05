@@ -121,9 +121,9 @@
   },
   {
     "title": "LullaBaby",
-    "pkg": "com.mfk.lullababy",
+    "pkg": "com.mfk.LullaBaby",
     "category": "aile",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.lullababy.png"
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.LullaBaby.png"
   },
   {
     "title": "MazeRush",
@@ -247,9 +247,9 @@
   },
   {
     "title": "Sky Defender",
-    "pkg": "com.mfk.skydefender",
+    "pkg": "com.mfk.SkyDefender",
     "category": "oyun",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.skydefender.png"
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.SkyDefender.png"
   },
   {
     "title": "Sky Strike",
@@ -259,9 +259,9 @@
   },
   {
     "title": "Smart Remote",
-    "pkg": "com.mfk.smartremote",
+    "pkg": "com.mfk.SmartRemote",
     "category": "arac",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.smartremote.png"
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.SmartRemote.png"
   },
   {
     "title": "SuperCar",
@@ -295,9 +295,9 @@
   },
   {
     "title": "TurfWars",
-    "pkg": "com.mfk.turfwars",
+    "pkg": "com.mfk.TurfWars",
     "category": "oyun",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.turfwars.png"
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.TurfWars.png"
   },
   {
     "title": "Türkiye Keşif",
@@ -313,8 +313,8 @@
   },
   {
     "title": "Void Runner",
-    "pkg": "com.mfk.voidrunner",
+    "pkg": "com.mfk.VoidRunner",
     "category": "oyun",
-    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.voidrunner.png"
+    "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.VoidRunner.png"
   }
 ]
