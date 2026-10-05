@@ -1,1211 +1,666 @@
 <!DOCTYPE html>
 <html lang="tr" dir="ltr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>mFk Games — Bağımsız Mobil Oyun Geliştiricisi | Indie Game Developer</title>
-    <meta name="google-site-verification" content="bzR5p9U7_C7qeLzEymNvsMtvL_5hWT2BOrcAg_utKmI" />
-    <meta name="description" content="mFk Games: Mobil platformlar için 2D-3D piksel art tarzında retro oyunlar geliştiren bağımsız bir indie oyun geliştiricisi. Eğlenceli ve her yaşa uygun mobil oyunlar.">
-
-    <!-- ── TWITTER & SOSYAL MEDYA KARTLARI (TAM URL İLE DÜZELTİLDİ) ── -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:site" content="@mfkgamesstudio">
-    <meta name="twitter:creator" content="@mfkgamesstudio">
-    <meta name="twitter:title" content="mFk Games — Bağımsız Mobil Oyun Geliştiricisi">
-    <meta name="twitter:description" content="Mobil platformlar için retro indie oyunlar geliştiren bağımsız geliştirici.">
-    <meta name="twitter:image" content="https://mfkgames.github.io/og-image.png">
-
-    <!-- Open Graph (Facebook, WhatsApp, LinkedIn) -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://mfkgames.github.io/">
-    <meta property="og:title" content="mFk Games — Bağımsız Mobil Oyun Geliştiricisi">
-    <meta property="og:description" content="Mobil platformlar için retro indie oyunlar geliştiren bağımsız geliştirici.">
-    <meta property="og:image" content="https://mfkgames.github.io/og-image.png">
-    <meta property="og:image:secure_url" content="https://mfkgames.github.io/og-image.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="https://mfkgames.github.io/favicon.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="https://mfkgames.github.io/favicon.png">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZEW07PZZ1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-9ZEW07PZZ1');
-    </script>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        :root {
-            --bg-dark: #07090e;
-            --btn-bg: rgba(18, 23, 34, 0.9);
-            --cyan: #00d2ff;
-            --green: #25f488;
-            --pink: #ff2a85;
-            --purple: #b537f2;
-            --yellow: #f5c518;
-            --text-sub: #94a3b8;
-            --text-body: #cbd5e1;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scrollbar-gutter: stable; }
-
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-body);
-            font-family: 'Inter', -apple-system, sans-serif;
-            min-height: 100vh;
-            min-height: 100dvh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-            overflow-x: hidden;
-            padding-top: env(safe-area-inset-top, 0px);
-            padding-bottom: env(safe-area-inset-bottom, 0px);
-            padding-left: env(safe-area-inset-left, 0px);
-            padding-right: env(safe-area-inset-right, 0px);
-        }
-
-        /* ── ARKA PLAN VE GEZİNEN NOKTACIKLAR ── */
-        .cyber-bg {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 0;
-            background: 
-                radial-gradient(circle at 18% 40%, rgba(255, 42, 133, 0.09) 0%, transparent 45%),
-                radial-gradient(circle at 82% 50%, rgba(0, 210, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 50% 100%, #07090e 0%, #030407 100%);
-        }
-
-        #particleCanvas {
-            position: fixed;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        /* ── DİL ÇUBUĞU ── */
-        .lang-bar {
-            position: absolute;
-            top: calc(16px + env(safe-area-inset-top, 0px));
-            right: calc(24px + env(safe-area-inset-right, 0px));
-            z-index: 100;
-        }
-
-        .lang-wrapper { position: relative; }
-
-        .lang-toggle {
-            background: rgba(18, 24, 38, 0.85);
-            border: 1.5px solid rgba(255, 255, 255, 0.15);
-            border-radius: 6px;
-            padding: 8px 12px;
-            color: #e2e8f0;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            cursor: pointer;
-            backdrop-filter: blur(10px);
-            transition: all 0.2s ease;
-        }
-
-        .lang-toggle:hover {
-            border-color: rgba(255, 255, 255, 0.4);
-            background: rgba(26, 34, 52, 0.95);
-        }
-
-        .lang-dropdown {
-            position: absolute;
-            top: calc(100% + 6px);
-            right: 0;
-            background: #0d111a;
-            border: 1.5px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            min-width: 150px;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.85);
-            z-index: 1000;
-        }
-
-        .lang-dropdown.open { display: flex; }
-
-        .lang-option {
-            padding: 9px 12px;
-            font-size: 12px;
-            color: #94a3b8;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.15s;
-        }
-
-        .lang-option:hover, .lang-option.active {
-            background: rgba(0, 210, 255, 0.15);
-            color: #fff;
-        }
-
-        /* ── HERO DÜZENİ ── */
-        .hero {
-            position: relative;
-            z-index: 2;
-            max-width: 1320px;
-            width: 100%;
-            margin: auto;
-            padding: 30px 40px 15px;
-            display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-            gap: 40px;
-            align-items: center;
-            flex: 1;
-        }
-
-        .hero-left {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .pixel-badge {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 9px;
-            color: #ff2a85;
-            border: 1.5px solid rgba(255, 42, 133, 0.5);
-            background: rgba(255, 42, 133, 0.08);
-            padding: 8px 13px;
-            border-radius: 5px;
-            letter-spacing: 0.6px;
-            margin-bottom: 24px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .hero-title {
-            font-family: 'Press Start 2P', monospace;
-            font-size: clamp(34px, 4.2vw, 56px);
-            line-height: 1.25;
-            margin-bottom: 22px;
-            color: #ffffff;
-            letter-spacing: -1px;
-            text-shadow: 3px 3px 0 rgba(0,0,0,0.9);
-        }
-
-        .hero-title span {
-            color: #ff2a85;
-            text-shadow: 0 0 25px rgba(255, 42, 133, 0.75), 3px 3px 0 #000;
-        }
-
-        .hero-sub {
-            font-size: 19px;
-            font-weight: 500;
-            color: #f1f5f9;
-            margin-bottom: 22px;
-            letter-spacing: -0.2px;
-        }
-
-        .hero-desc {
-            font-size: 15.5px;
-            line-height: 1.75;
-            color: var(--text-sub);
-            max-width: 540px;
-            margin-bottom: 30px;
-        }
-
-        /* ── BUTON GRUBU ── */
-        .hero-buttons {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: nowrap;
-            width: 100%;
-        }
-
-        .btn-modern {
-            height: 42px;
-            padding: 0 15px;
-            border-radius: 8px;
-            background: var(--btn-bg);
-            backdrop-filter: blur(12px);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            text-decoration: none;
-            font-family: 'Press Start 2P', monospace;
-            font-size: 8px;
-            letter-spacing: 0.2px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-            user-select: none;
-            border: 1.5px solid transparent;
-            white-space: nowrap;
-            flex-shrink: 0;
-        }
-
-        .btn-modern svg {
-            width: 14px;
-            height: 14px;
-            flex-shrink: 0;
-        }
-
-        .btn-play {
-            color: var(--cyan);
-            border-color: rgba(0, 210, 255, 0.45);
-            box-shadow: 0 4px 0 #006b85, 0 6px 14px rgba(0, 210, 255, 0.2);
-        }
-        .btn-play svg { fill: var(--cyan); }
-        .btn-play:hover {
-            border-color: var(--cyan);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 #006b85, 0 8px 20px rgba(0, 210, 255, 0.4);
-        }
-
-        .btn-apple {
-            color: var(--green);
-            border-color: rgba(37, 244, 136, 0.45);
-            box-shadow: 0 4px 0 #0e7840, 0 6px 14px rgba(37, 244, 136, 0.2);
-        }
-        .btn-apple svg { fill: var(--green); }
-        .btn-apple:hover {
-            border-color: var(--green);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 #0e7840, 0 8px 20px rgba(37, 244, 136, 0.4);
-        }
-
-        .btn-links {
-            color: #e2e8f0;
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 0 #202738, 0 6px 14px rgba(0, 0, 0, 0.5);
-        }
-        .btn-links svg { fill: #e2e8f0; }
-        .btn-links:hover {
-            border-color: rgba(255, 255, 255, 0.45);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 #202738;
-        }
-
-        .btn-contact {
-            color: var(--yellow);
-            border-color: rgba(245, 197, 24, 0.45);
-            box-shadow: 0 4px 0 #7a6108, 0 6px 14px rgba(245, 197, 24, 0.2);
-        }
-        .btn-contact svg { fill: var(--yellow); }
-        .btn-contact:hover {
-            border-color: var(--yellow);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 0 #7a6108, 0 8px 20px rgba(245, 197, 24, 0.4);
-        }
-
-        /* ── BAĞLANTILAR MENÜSÜ ── */
-        .social-wrap { position: relative; }
-
-        .social-menu {
-            position: absolute;
-            bottom: calc(100% + 8px);
-            left: 0;
-            background: #0f1422;
-            border: 1.5px solid rgba(255, 255, 255, 0.18);
-            border-radius: 8px;
-            min-width: 175px;
-            display: none;
-            flex-direction: column;
-            box-shadow: 0 12px 30px rgba(0,0,0,0.85);
-            z-index: 1000;
-        }
-
-        .social-menu.open { display: flex; }
-        .social-item { position: relative; }
-
-        .social-header {
-            padding: 9px 12px;
-            font-size: 11px;
-            font-weight: 600;
-            color: #94a3b8;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .social-header:hover { color: #fff; background: rgba(255, 255, 255, 0.05); }
-
-        .social-sub-list {
-            position: absolute;
-            left: calc(100% + 4px);
-            bottom: 0;
-            background: #0f1422;
-            border: 1.5px solid rgba(255, 255, 255, 0.18);
-            border-radius: 8px;
-            min-width: 145px;
-            display: none;
-            flex-direction: column;
-            overflow: hidden;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.85);
-        }
-
-        .social-item:hover .social-sub-list { display: flex; }
-
-        .social-link {
-            padding: 8px 12px;
-            font-size: 11.5px;
-            color: #cbd5e1;
-            text-decoration: none;
-            white-space: nowrap;
-        }
-
-        .social-link:hover { background: rgba(0, 210, 255, 0.15); color: #fff; }
-
-        /* ── SAĞ TARAF: ANAKART & ARCADE VİTRİNİ ── */
-        .showcase-stage {
-            position: relative;
-            width: 100%;
-            height: 480px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .pcb-motherboard-svg {
-            position: absolute;
-            inset: -20px -20px;
-            width: calc(100% + 40px);
-            height: calc(100% + 40px);
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .card-stage-container {
-            position: relative;
-            width: 440px;
-            height: 400px;
-            z-index: 2;
-        }
-
-        .ghost-screen {
-            position: absolute;
-            border-radius: 14px;
-            background: #070a12;
-            pointer-events: none;
-            overflow: hidden;
-            opacity: 0.45;
-            z-index: 2;
-        }
-
-        .ghost-screen-1 {
-            top: 20px;
-            right: 0px;
-            width: 180px;
-            height: 115px;
-            border: 2px solid var(--purple);
-            box-shadow: 0 0 15px rgba(181, 55, 242, 0.3);
-            background: linear-gradient(135deg, #18092a, #070a12);
-        }
-
-        .ghost-screen-2 {
-            bottom: 25px;
-            left: 5px;
-            width: 170px;
-            height: 115px;
-            border: 2px solid var(--pink);
-            box-shadow: 0 0 15px rgba(255, 42, 133, 0.3);
-            background: linear-gradient(135deg, #240716, #070a12);
-        }
-
-        .ghost-screen-3 {
-            bottom: 35px;
-            right: 15px;
-            width: 130px;
-            height: 85px;
-            border: 2px solid var(--cyan);
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.25);
-            background: #070a12;
-        }
-
-        .arcade-screen {
-            position: absolute;
-            border-radius: 16px;
-            background: #0e121d;
-            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.95);
-            cursor: pointer;
-            transition: all 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            text-decoration: none;
-            z-index: 4;
-            overflow: hidden;
-        }
-
-        .arcade-screen::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0.25) 0px,
-                rgba(0, 0, 0, 0.25) 1px,
-                transparent 1px,
-                transparent 2px
-            );
-            pointer-events: none;
-            z-index: 10;
-        }
-
-        .screen-hud-top {
-            position: relative;
-            height: 20px;
-            padding: 0 10px;
-            background: rgba(255, 255, 255, 0.04);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            z-index: 6;
-            flex-shrink: 0;
-        }
-
-        .hud-left {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .health-bar {
-            width: 30px;
-            height: 4px;
-            background: rgba(0,0,0,0.6);
-            border: 1px solid rgba(255,255,255,0.3);
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .health-fill {
-            width: 80%;
-            height: 100%;
-            background: #ff3344;
-        }
-
-        .hud-coin {
-            font-size: 7px;
-            color: #ffcc00;
-        }
-
-        .hud-tag {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 5.5px;
-            color: rgba(255, 255, 255, 0.4);
-            letter-spacing: 0.5px;
-        }
-
-        .screen-inner {
-            position: relative;
-            flex: 1;
-            width: 100%;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            padding: 10px 12px;
-            gap: 12px;
-            background: radial-gradient(circle at 50% 50%, #151a28 0%, #0a0d15 100%);
-            box-sizing: border-box;
-        }
-
-        .game-icon-box {
-            position: relative;
-            width: 58px;
-            height: 58px;
-            flex-shrink: 0;
-            border-radius: 10px;
-            overflow: hidden;
-            background: #080a10;
-            border: 1.5px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .game-icon-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
-            transition: transform 0.4s ease;
-        }
-
-        .arcade-screen:hover .game-icon-img {
-            transform: scale(1.08);
-        }
-
-        .game-info-col {
-            flex: 1;
-            min-width: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            gap: 5px;
-        }
-
-        .game-meta-badge {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 6px;
-            letter-spacing: 0.5px;
-            padding: 2px 5px;
-            border-radius: 3px;
-            background: rgba(255, 255, 255, 0.06);
-            width: fit-content;
-            color: #94a3b8;
-        }
-
-        .arcade-title {
-            font-family: 'Press Start 2P', monospace;
-            font-size: 9.5px;
-            line-height: 1.35;
-            color: #ffffff;
-            letter-spacing: -0.2px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
-            width: 100%;
-        }
-
-        .game-play-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 10.5px;
-            font-weight: 600;
-            color: #cbd5e1;
-            margin-top: 1px;
-        }
-
-        .game-play-badge span {
-            font-size: 8px;
-            opacity: 0.7;
-        }
-
-        .slot-top {
-            top: 25px;
-            left: 15px;
-            width: 250px;
-            height: 130px;
-            border: 2px solid var(--cyan);
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.4);
-            z-index: 5;
-        }
-        .slot-top .game-icon-box { border-color: rgba(0, 210, 255, 0.5); }
-
-        .slot-bottom {
-            bottom: 25px;
-            left: 55px;
-            width: 260px;
-            height: 135px;
-            border: 2px solid var(--pink);
-            box-shadow: 0 0 25px rgba(255, 42, 133, 0.4);
-            z-index: 6;
-        }
-        .slot-bottom .game-icon-box { border-color: rgba(255, 42, 133, 0.5); }
-
-        .slot-center {
-            top: 125px;
-            left: 60px;
-            width: 280px;
-            height: 145px;
-            border: 2.5px solid var(--green);
-            box-shadow: 0 0 35px rgba(37, 244, 136, 0.5), 0 20px 45px rgba(0,0,0,0.95);
-            z-index: 8;
-            transform: scale(1.02);
-        }
-        .slot-center .game-icon-box {
-            width: 66px;
-            height: 66px;
-            border-color: rgba(37, 244, 136, 0.5);
-        }
-        .slot-center .arcade-title { font-size: 10.5px; }
-
-        /* ── FOOTER ── */
-        footer {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 12px 20px;
-            padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.35);
-        }
-        footer p {
-            margin: 0;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            flex-wrap: nowrap;
-        }
-        footer a {
-            color: rgba(255, 255, 255, 0.55);
-            text-decoration: none;
-            margin: 0 6px;
-            transition: color 0.2s;
-        }
-        footer a:hover { color: #fff; }
-
-        /* ── MOBİL UYARLAMA ── */
-        @media (max-width: 900px) {
-            html, body {
-                height: auto;
-                min-height: 100vh;
-            }
-            .hero {
-                grid-template-columns: 1fr;
-                gap: 20px;
-                padding-top: calc(75px + env(safe-area-inset-top, 0px));
-                padding-left: calc(20px + env(safe-area-inset-left, 0px));
-                padding-right: calc(20px + env(safe-area-inset-right, 0px));
-                padding-bottom: 20px;
-                text-align: center;
-            }
-            .hero-left {
-                align-items: center;
-                width: 100%;
-            }
-            .pixel-badge {
-                margin-top: 0;
-                margin-bottom: 20px;
-            }
-            .hero-title {
-                font-size: clamp(30px, 8vw, 40px);
-                margin-bottom: 16px;
-            }
-            .hero-sub {
-                font-size: 16px;
-                margin-bottom: 16px;
-            }
-            .hero-desc {
-                font-size: 14px;
-                line-height: 1.65;
-                margin-left: auto;
-                margin-right: auto;
-                margin-bottom: 34px;
-                max-width: 92%;
-            }
-            .hero-buttons {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-                width: 100%;
-                max-width: 300px;
-                margin: 0 auto;
-                flex-wrap: wrap;
-            }
-            .btn-modern {
-                width: 100%;
-                height: 38px;
-                padding: 0 8px;
-                font-size: 7px;
-                gap: 5px;
-                border-radius: 6px;
-            }
-            .btn-modern svg {
-                width: 12px;
-                height: 12px;
-            }
-            .social-wrap {
-                width: 100%;
-            }
-            .social-wrap .btn-modern {
-                width: 100%;
-            }
-            .social-menu {
-                left: 50%;
-                transform: translateX(-50%);
-                width: 90%;
-            }
-
-            .showcase-stage {
-                height: 350px;
-                width: 100%;
-                overflow: hidden;
-            }
-            .card-stage-container {
-                transform: scale(0.78);
-                transform-origin: center center;
-                margin: 0 auto;
-            }
-
-            footer {
-                padding: 10px 10px;
-                padding-bottom: calc(12px + env(safe-area-inset-bottom, 0px));
-            }
-            footer p {
-                font-size: 8.5px;
-                white-space: nowrap;
-                letter-spacing: -0.2px;
-            }
-            footer a {
-                margin: 0 3px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .hero-title { font-size: 26px; }
-            .hero-buttons { max-width: 280px; }
-            .btn-modern { font-size: 6.5px; }
-            footer p { font-size: 7.5px; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>mFk Games — Bağımsız Mobil Oyun Geliştiricisi | Indie Game Developer</title>
+<meta name="google-site-verification" content="bzR5p9U7_C7qeLzEymNvsMtvL_5hWT2BOrcAg_utKmI" />
+<meta name="description" content="mFk Games: Mobil platformlar için 2D-3D piksel art tarzında retro oyunlar geliştiren bağımsız bir indie oyun geliştiricisi. Eğlenceli ve her yaşa uygun mobil oyunlar.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@mfkgamesstudio">
+<meta name="twitter:creator" content="@mfkgamesstudio">
+<meta name="twitter:title" content="mFk Games — Bağımsız Mobil Oyun Geliştiricisi">
+<meta name="twitter:description" content="Mobil platformlar için retro indie oyunlar geliştiren bağımsız geliştirici.">
+<meta name="twitter:image" content="https://mfkgames.github.io/og-image.png">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://mfkgames.github.io/">
+<meta property="og:title" content="mFk Games — Bağımsız Mobil Oyun Geliştiricisi">
+<meta property="og:description" content="Mobil platformlar için retro indie oyunlar geliştiren bağımsız geliştirici.">
+<meta property="og:image" content="https://mfkgames.github.io/og-image.png">
+<meta property="og:image:secure_url" content="https://mfkgames.github.io/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<link rel="icon" type="image/png" sizes="32x32" href="https://mfkgames.github.io/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://mfkgames.github.io/favicon.png">
+
+<!-- Google Analytics (G-9ZEW07PZZ1) yalnızca çerez onayı sonrası yüklenir; bkz. loadGA() -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{--bg-dark:#07090e;--btn-bg:rgba(18,23,34,.9);--cyan:#00d2ff;--green:#25f488;--pink:#ff2a85;--purple:#b537f2;--yellow:#f5c518;--text-sub:#94a3b8;--text-body:#cbd5e1}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scrollbar-gutter:stable}
+body{background-color:var(--bg-dark);color:var(--text-body);font-family:'Inter',-apple-system,sans-serif;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow-x:hidden;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);padding-left:env(safe-area-inset-left,0px);padding-right:env(safe-area-inset-right,0px)}
+
+.cyber-bg{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 18% 40%,rgba(255,42,133,.09) 0%,transparent 45%),radial-gradient(circle at 82% 50%,rgba(0,210,255,.08) 0%,transparent 50%),radial-gradient(circle at 50% 100%,#07090e 0%,#030407 100%)}
+#particleCanvas{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+
+/* DİL ÇUBUĞU */
+.lang-bar{position:absolute;top:calc(16px + env(safe-area-inset-top,0px));right:calc(24px + env(safe-area-inset-right,0px));z-index:100}
+.lang-wrapper{position:relative}
+.lang-toggle{background:rgba(18,24,38,.85);border:1.5px solid rgba(255,255,255,.15);border-radius:6px;padding:8px 12px;color:#e2e8f0;font-family:'Press Start 2P',monospace;font-size:8px;display:flex;align-items:center;gap:6px;cursor:pointer;backdrop-filter:blur(10px);transition:all .2s ease}
+.lang-toggle:hover{border-color:rgba(255,255,255,.4);background:rgba(26,34,52,.95)}
+.lang-dropdown{position:absolute;top:calc(100% + 6px);right:0;background:#0d111a;border:1.5px solid rgba(255,255,255,.15);border-radius:8px;min-width:150px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.85);z-index:1000}
+.lang-dropdown.open{display:flex}
+.lang-option{padding:9px 12px;font-size:12px;color:#94a3b8;cursor:pointer;display:flex;align-items:center;gap:8px;transition:all .15s}
+.lang-option:hover,.lang-option.active,.lang-option:focus-visible{background:rgba(0,210,255,.15);color:#fff;outline:none}
+
+/* HERO */
+.hero{position:relative;z-index:2;max-width:1320px;width:100%;margin:auto;padding:30px 40px 15px;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:40px;align-items:center;flex:1}
+.hero-left{display:flex;flex-direction:column;align-items:flex-start}
+.pixel-badge{font-family:'Press Start 2P',monospace;font-size:9px;color:#ff2a85;border:1.5px solid rgba(255,42,133,.5);background:rgba(255,42,133,.08);padding:8px 13px;border-radius:5px;letter-spacing:.6px;margin-bottom:24px;display:inline-flex;align-items:center;gap:8px}
+.hero-title{font-family:'Press Start 2P',monospace;font-size:clamp(34px,4.2vw,56px);line-height:1.25;margin-bottom:22px;color:#fff;letter-spacing:-1px;text-shadow:3px 3px 0 rgba(0,0,0,.9)}
+.hero-title span{color:#ff2a85;text-shadow:0 0 25px rgba(255,42,133,.75),3px 3px 0 #000}
+.hero-sub{font-size:19px;font-weight:500;color:#f1f5f9;margin-bottom:22px;letter-spacing:-.2px}
+.hero-desc{font-size:15.5px;line-height:1.75;color:var(--text-sub);max-width:540px;margin-bottom:30px}
+
+/* BUTONLAR */
+.hero-buttons{display:flex;align-items:center;gap:10px;flex-wrap:wrap;width:100%}
+.btn-modern{height:42px;padding:0 15px;border-radius:8px;background:var(--btn-bg);backdrop-filter:blur(12px);display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-family:'Press Start 2P',monospace;font-size:8px;letter-spacing:.2px;cursor:pointer;transition:all .15s ease;user-select:none;border:1.5px solid transparent;white-space:nowrap;flex-shrink:0}
+.btn-modern svg{width:14px;height:14px;flex-shrink:0}
+.btn-play{color:var(--cyan);border-color:rgba(0,210,255,.45);box-shadow:0 4px 0 #006b85,0 6px 14px rgba(0,210,255,.2)}
+.btn-play svg{fill:var(--cyan)}
+.btn-play:hover{border-color:var(--cyan);transform:translateY(-2px);box-shadow:0 6px 0 #006b85,0 8px 20px rgba(0,210,255,.4)}
+.btn-apple{color:var(--green);border-color:rgba(37,244,136,.45);box-shadow:0 4px 0 #0e7840,0 6px 14px rgba(37,244,136,.2)}
+.btn-apple svg{fill:var(--green)}
+.btn-apple:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 6px 0 #0e7840,0 8px 20px rgba(37,244,136,.4)}
+.btn-links{color:#e2e8f0;border-color:rgba(255,255,255,.2);box-shadow:0 4px 0 #202738,0 6px 14px rgba(0,0,0,.5)}
+.btn-links svg{fill:#e2e8f0}
+.btn-links:hover{border-color:rgba(255,255,255,.45);transform:translateY(-2px);box-shadow:0 6px 0 #202738}
+.btn-contact{color:var(--yellow);border-color:rgba(245,197,24,.45);box-shadow:0 4px 0 #7a6108,0 6px 14px rgba(245,197,24,.2)}
+.btn-contact svg{fill:var(--yellow)}
+.btn-contact:hover{border-color:var(--yellow);transform:translateY(-2px);box-shadow:0 6px 0 #7a6108,0 8px 20px rgba(245,197,24,.4)}
+
+/* BAĞLANTILAR MENÜSÜ */
+.social-wrap{position:relative}
+.social-menu{position:absolute;bottom:calc(100% + 8px);left:0;background:#0f1422;border:1.5px solid rgba(255,255,255,.18);border-radius:8px;min-width:175px;display:none;flex-direction:column;box-shadow:0 12px 30px rgba(0,0,0,.85);z-index:1000}
+.social-menu.open{display:flex}
+.social-item{position:relative}
+.social-header{padding:9px 12px;font-size:11px;font-weight:600;color:#94a3b8;cursor:pointer;display:flex;align-items:center;justify-content:space-between}
+.social-header:hover,.social-header:focus-visible{color:#fff;background:rgba(255,255,255,.05);outline:none}
+.social-sub-list{position:absolute;left:calc(100% + 4px);bottom:0;background:#0f1422;border:1.5px solid rgba(255,255,255,.18);border-radius:8px;min-width:145px;display:none;flex-direction:column;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.85)}
+@media (hover:hover){.social-item:hover .social-sub-list{display:flex}}
+.social-item.open .social-sub-list{display:flex}
+.social-link{padding:8px 12px;font-size:11.5px;color:#cbd5e1;text-decoration:none;white-space:nowrap}
+.social-link:hover{background:rgba(0,210,255,.15);color:#fff}
+
+/* VİTRİN */
+.showcase-stage{position:relative;width:100%;height:480px;display:flex;align-items:center;justify-content:center}
+.pcb-motherboard-svg{position:absolute;inset:-20px -20px;width:calc(100% + 40px);height:calc(100% + 40px);pointer-events:none;z-index:1}
+.card-stage-container{position:relative;width:440px;height:400px;z-index:2}
+.ghost-screen{position:absolute;border-radius:14px;background:#070a12;pointer-events:none;overflow:hidden;opacity:.45;z-index:2}
+.ghost-screen-1{top:20px;right:0;width:180px;height:115px;border:2px solid var(--purple);box-shadow:0 0 15px rgba(181,55,242,.3);background:linear-gradient(135deg,#18092a,#070a12)}
+.ghost-screen-2{bottom:25px;left:5px;width:170px;height:115px;border:2px solid var(--pink);box-shadow:0 0 15px rgba(255,42,133,.3);background:linear-gradient(135deg,#240716,#070a12)}
+.ghost-screen-3{bottom:35px;right:15px;width:130px;height:85px;border:2px solid var(--cyan);box-shadow:0 0 15px rgba(0,210,255,.25);background:#070a12}
+
+.arcade-screen{text-align:start;--c:var(--cyan);--glow:rgba(0,210,255,.4);--hp:80%;position:absolute;border-radius:16px;background:#0e121d;border:2px solid var(--c);box-shadow:0 0 25px var(--glow),0 18px 40px rgba(0,0,0,.95);cursor:pointer;transition:all .6s cubic-bezier(.2,.8,.2,1),border-color .6s,box-shadow .6s;display:flex;flex-direction:column;text-decoration:none;z-index:4;overflow:hidden}
+.arcade-screen::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,.25) 0,rgba(0,0,0,.25) 1px,transparent 1px,transparent 2px);pointer-events:none;z-index:10}
+.screen-hud-top{position:relative;height:20px;padding:0 10px;background:rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:space-between;z-index:6;flex-shrink:0}
+.hud-left{display:flex;align-items:center;gap:6px}
+.health-bar{width:30px;height:4px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.3);border-radius:2px;overflow:hidden}
+.health-fill{height:100%;background:var(--c);width:var(--hp);transition:all .6s}
+.hud-coin{font-size:7px;color:#fc0}
+.hud-tag{font-family:'Press Start 2P',monospace;font-size:5.5px;color:rgba(255,255,255,.4);letter-spacing:.5px}
+.screen-inner{position:relative;flex:1;width:100%;overflow:hidden;display:flex;align-items:center;padding:10px 12px;gap:12px;background:radial-gradient(circle at 50% 50%,#151a28 0%,#0a0d15 100%);box-sizing:border-box;transition:opacity .3s}
+.arcade-screen.swap .screen-inner{opacity:0}
+.game-icon-box{position:relative;width:58px;height:58px;flex-shrink:0;border-radius:10px;overflow:hidden;background:#080a10;border:1.5px solid var(--c);box-shadow:0 4px 15px rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;transition:border-color .6s}
+.game-icon-img{width:100%;height:100%;object-fit:cover;border-radius:8px;transition:transform .4s ease}
+.arcade-screen:hover .game-icon-img{transform:scale(1.08)}
+.game-info-col{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:5px}
+.game-meta-badge{font-family:'Press Start 2P',monospace;font-size:6px;letter-spacing:.5px;padding:2px 5px;border-radius:3px;background:rgba(255,255,255,.06);width:fit-content;color:var(--c);transition:color .6s}
+.arcade-title{font-family:'Press Start 2P',monospace;font-size:9.5px;line-height:1.35;color:var(--c);letter-spacing:-.2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:2px 2px 0 rgba(0,0,0,.8);width:100%;transition:color .6s}
+.game-play-badge{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;color:#cbd5e1;margin-top:1px}
+.game-play-badge span{font-size:8px;opacity:.7}
+
+.slot-top{top:25px;left:15px;width:250px;height:130px;z-index:5;--c:var(--cyan);--glow:rgba(0,210,255,.4);--hp:80%}
+.slot-bottom{bottom:25px;left:55px;width:260px;height:135px;z-index:6;--c:var(--pink);--glow:rgba(255,42,133,.4);--hp:60%}
+.slot-center{top:125px;left:60px;width:280px;height:145px;z-index:8;transform:scale(1.02);--c:var(--green);--glow:rgba(37,244,136,.5);--hp:90%;box-shadow:0 0 35px var(--glow),0 20px 45px rgba(0,0,0,.95)}
+.slot-center .game-icon-box{width:66px;height:66px}
+.slot-center .arcade-title{font-size:10.5px}
+
+/* FOOTER */
+footer{position:relative;z-index:2;text-align:center;padding:12px 20px;font-size:11px;color:rgba(255,255,255,.35)}
+footer p{margin:0;display:inline-flex;align-items:center;justify-content:center;flex-wrap:wrap;row-gap:2px}
+footer a{color:rgba(255,255,255,.55);text-decoration:none;margin:0 6px;transition:color .2s}
+footer a:hover{color:#fff}
+
+/* ÇEREZ ONAY BANDI */
+.consent{position:fixed;left:0;right:0;bottom:0;z-index:2000;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(10,14,24,.96);backdrop-filter:blur(12px);border-top:1.5px solid rgba(0,210,255,.35);box-shadow:0 -8px 30px rgba(0,0,0,.6);text-align:start}
+.consent[hidden]{display:none}
+.consent p{font-size:12.5px;line-height:1.55;color:var(--text-body);max-width:720px}
+.consent p a{color:var(--cyan);margin-inline-start:6px;text-decoration:underline}
+.consent-btns{display:flex;gap:8px}
+.consent .btn-modern{width:auto;height:38px;padding:0 14px}
+.c-yes{color:var(--green);border-color:rgba(37,244,136,.45);box-shadow:0 3px 0 #0e7840}
+.c-no{color:#e2e8f0;border-color:rgba(255,255,255,.2);box-shadow:0 3px 0 #202738}
+@media (max-width:600px){
+  .consent{flex-direction:column;align-items:stretch;gap:10px;padding:12px 14px calc(12px + env(safe-area-inset-bottom,0px))}
+  .consent-btns{width:100%}
+  .consent .btn-modern{flex:1}
+}
+
+/* MASAÜSTÜ BÜYÜTME (mobile dokunmaz) */
+@media (min-width:901px){
+  .hero{max-width:1560px;padding:40px 56px 24px;gap:56px}
+  .pixel-badge{font-size:clamp(10px,.75vw,13px);padding:10px 16px;margin-bottom:30px}
+  .hero-title{font-size:clamp(44px,4vw,76px);margin-bottom:28px}
+  .hero-sub{font-size:clamp(21px,1.6vw,30px);margin-bottom:26px}
+  .hero-desc{font-size:clamp(16px,1.1vw,20px);max-width:clamp(540px,38vw,680px);margin-bottom:38px}
+  .hero-buttons{gap:14px}
+  .btn-modern{height:clamp(46px,2.9vw,58px);padding:0 clamp(18px,1.3vw,26px);font-size:clamp(9px,.62vw,12px);gap:10px;border-radius:10px}
+  .btn-modern svg{width:clamp(16px,1.1vw,21px);height:clamp(16px,1.1vw,21px)}
+  .lang-toggle{font-size:10px;padding:11px 15px}
+  .lang-option{font-size:14px;padding:11px 16px}
+  .social-menu{min-width:200px}
+  .social-header{font-size:13px;padding:11px 15px}
+  .social-link{font-size:13.5px;padding:10px 15px}
+  footer{font-size:13px}
+  .consent p{font-size:14px}
+  .showcase-stage{height:560px}
+  .card-stage-container{transform:scale(1.2)}
+  .slot-top{width:270px;height:140px}
+  .slot-bottom{width:280px;height:145px;left:50px}
+  .slot-center{width:310px;height:155px;top:120px;left:55px}
+  .screen-hud-top{height:24px}
+  .hud-tag{font-size:7px}
+  .game-meta-badge{font-size:7.5px;padding:3px 6px}
+  .arcade-title{font-size:10.5px}
+  .slot-center .arcade-title{font-size:11.5px}
+  .game-play-badge{font-size:12.5px}
+  .game-icon-box{width:64px;height:64px}
+  .slot-center .game-icon-box{width:76px;height:76px}
+}
+@media (min-width:1400px){.showcase-stage{height:660px}.card-stage-container{transform:scale(1.45)}}
+@media (min-width:1700px){.showcase-stage{height:740px}.card-stage-container{transform:scale(1.65)}}
+
+/* MOBİL */
+@media (max-width:900px){
+  html,body{height:auto;min-height:100vh}
+  .hero{grid-template-columns:1fr;gap:20px;padding:75px 20px 20px;text-align:center}
+  .hero-left{align-items:center;width:100%}
+  .pixel-badge{margin-top:0;margin-bottom:20px}
+  .hero-title{font-size:clamp(30px,8vw,40px);margin-bottom:16px}
+  .hero-sub{font-size:16px;margin-bottom:16px}
+  .hero-desc{font-size:14px;line-height:1.65;margin:0 auto 34px;max-width:92%}
+  .hero-buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:300px;margin:0 auto}
+  .btn-modern{width:100%;height:44px;padding:0 8px;font-size:7px;gap:5px;border-radius:6px}
+  .btn-modern svg{width:12px;height:12px}
+  .social-wrap,.social-wrap .btn-modern{width:100%}
+  .social-menu{left:50%;transform:translateX(-50%);width:90%}
+  .social-sub-list{position:static;border:0;box-shadow:none;background:rgba(255,255,255,.04);border-radius:0}
+  .lang-toggle{min-height:44px;padding:10px 12px}
+  .showcase-stage{height:350px;width:100%;overflow:hidden}
+  .card-stage-container{transform:scale(.78);transform-origin:center center;margin:0 auto}
+  footer{padding:10px 10px 12px}
+  footer p{font-size:8.5px;letter-spacing:-.2px}
+  footer a{margin:0 3px}
+}
+@media (max-width:420px){.card-stage-container{transform:scale(.72)}}
+@media (max-width:380px){
+  .hero-title{font-size:26px}
+  .hero-buttons{max-width:280px}
+  .btn-modern{font-size:6.5px}
+  footer p{font-size:7.5px}
+  .card-stage-container{transform:scale(.66)}
+  .showcase-stage{height:300px}
+}
+html[lang="ja"] .btn-modern,html[lang="ja"] .pixel-badge,html[lang="ja"] .lang-toggle,
+html[lang="ar"] .btn-modern,html[lang="ar"] .pixel-badge,html[lang="ar"] .lang-toggle{font-family:'Inter',sans-serif;font-size:11px;font-weight:700;letter-spacing:0}
+@media (prefers-reduced-motion:reduce){.arcade-screen,.btn-modern{transition:none}}
+</style>
 </head>
 <body>
 
 <div class="cyber-bg"></div>
 <canvas id="particleCanvas"></canvas>
 
-<!-- ── DİL ÇUBUĞU ── -->
 <div class="lang-bar">
-    <div class="lang-wrapper">
-        <button class="lang-toggle" id="langBtn">
-            <span>🌐</span>
-            <span id="langLabel">TR</span>
-        </button>
-        <div class="lang-dropdown" id="langDropdown">
-            <div class="lang-option active" data-lang="tr"><span>🇹🇷</span> Türkçe</div>
-            <div class="lang-option" data-lang="en"><span>🇬🇧</span> English</div>
-            <div class="lang-option" data-lang="de"><span>🇩🇪</span> Deutsch</div>
-            <div class="lang-option" data-lang="fr"><span>🇫🇷</span> Français</div>
-            <div class="lang-option" data-lang="es"><span>🇪🇸</span> Español</div>
-            <div class="lang-option" data-lang="it"><span>🇮🇹</span> Italiano</div>
-            <div class="lang-option" data-lang="pt"><span>🇧🇷</span> Português</div>
-            <div class="lang-option" data-lang="ru"><span>🇷🇺</span> Русский</div>
-            <div class="lang-option" data-lang="ja"><span>🇯🇵</span> 日本語</div>
-            <div class="lang-option" data-lang="ar"><span>🇸🇦</span> العربية</div>
-        </div>
+  <div class="lang-wrapper">
+    <button class="lang-toggle" id="langBtn" aria-haspopup="true" aria-expanded="false">
+      <span>🌐</span><span id="langLabel">TR</span>
+    </button>
+    <div class="lang-dropdown" id="langDropdown">
+      <div class="lang-option active" data-lang="tr"><span>🇹🇷</span> Türkçe</div>
+      <div class="lang-option" data-lang="en"><span>🇬🇧</span> English</div>
+      <div class="lang-option" data-lang="de"><span>🇩🇪</span> Deutsch</div>
+      <div class="lang-option" data-lang="fr"><span>🇫🇷</span> Français</div>
+      <div class="lang-option" data-lang="es"><span>🇪🇸</span> Español</div>
+      <div class="lang-option" data-lang="it"><span>🇮🇹</span> Italiano</div>
+      <div class="lang-option" data-lang="pt"><span>🇧🇷</span> Português</div>
+      <div class="lang-option" data-lang="ru"><span>🇷🇺</span> Русский</div>
+      <div class="lang-option" data-lang="ja"><span>🇯🇵</span> 日本語</div>
+      <div class="lang-option" data-lang="ar"><span>🇸🇦</span> العربية</div>
     </div>
+  </div>
 </div>
 
-<!-- ── HERO ALANI ── -->
 <main class="hero">
+  <div class="hero-left">
+    <div class="pixel-badge" id="el-badge">▶ OYUN GELİŞTİRİCİ</div>
+    <h1 class="hero-title">mFk <span>Games</span></h1>
+    <h2 class="hero-sub" id="el-heroSub">Bağımsız Mobil Oyun Geliştiricisi</h2>
+    <p class="hero-desc" id="el-heroDesc">Mobil platformlar için eğlenceli, sade ve her yaşa uygun oyunlar geliştiriyorum. Tasarımdan kodlamaya tüm süreci üstleniyor, 2D-3D piksel art tarzındaki retro projelerimle nostaljik bir indie oyun deneyimi sunuyorum.</p>
 
-    <div class="hero-left">
-        <div class="pixel-badge" id="el-badge">▶ OYUN GELİŞTİRİCİ</div>
-        <h1 class="hero-title">mFk <span>Games</span></h1>
-        <h2 class="hero-sub" id="el-heroSub">Bağımsız Mobil Oyun Geliştiricisi</h2>
-        <p class="hero-desc" id="el-heroDesc">
-            Mobil platformlar için eğlenceli, sade ve her yaşa uygun oyunlar geliştiriyorum. Tasarımdan kodlamaya tüm süreci üstleniyor, 2D-3D piksel art tarzındaki retro projelerimle nostaljik bir indie oyun deneyimi sunuyorum.
-        </p>
+    <div class="hero-buttons">
+      <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="btn-modern btn-play">
+        <svg viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
+        <span id="el-btnPlay">Play</span>
+      </a>
 
-        <div class="hero-buttons">
-            <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="btn-modern btn-play">
-                <svg viewBox="0 0 24 24"><path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z"/></svg>
-                <span id="el-btnPlay">Play</span>
-            </a>
+      <a href="https://apps.apple.com" target="_blank" rel="noopener" class="btn-modern btn-apple">
+        <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.77 1.06-1.85.94-2.93-.93.04-2.03.62-2.69 1.39-.58.67-1.09 1.77-.95 2.83 1.04.08 2.07-.52 2.7-1.29z"/></svg>
+        <span id="el-btnApple">Apple</span>
+      </a>
 
-            <a href="https://apps.apple.com" target="_blank" rel="noopener" class="btn-modern btn-apple">
-                <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.63-.77 1.06-1.85.94-2.93-.93.04-2.03.62-2.69 1.39-.58.67-1.09 1.77-.95 2.83 1.04.08 2.07-.52 2.7-1.29z"/></svg>
-                <span id="el-btnApple">Apple</span>
-            </a>
-
-            <div class="social-wrap">
-                <button class="btn-modern btn-links" id="socialBtn">
-                    <svg viewBox="0 0 24 24"><path d="M10.59,13.41C11,13.8 11,14.44 10.59,14.83C10.2,15.22 9.56,15.22 9.17,14.83C7.22,12.88 7.22,9.71 9.17,7.76V7.76L12.71,4.22C14.66,2.27 17.83,2.27 19.78,4.22C21.73,6.17 21.73,9.34 19.78,11.29L18.29,12.78C18.3,11.96 18.17,11.14 17.89,10.36L18.36,9.88C19.54,8.71 19.54,6.81 18.36,5.64C17.19,4.46 15.29,4.46 14.12,5.64L10.59,9.17C9.41,10.34 9.41,12.24 10.59,13.41M13.41,9.17C13.8,8.78 14.44,8.78 14.83,9.17C16.78,11.12 16.78,14.29 14.83,16.24V16.24L11.29,19.78C9.34,21.73 6.17,21.73 4.22,19.78C2.27,17.83 2.27,14.66 4.22,12.71L5.71,11.22C5.7,12.04 5.83,12.86 6.11,13.64L5.64,14.12C4.46,15.29 4.46,17.19 5.64,18.36C6.81,19.54 8.71,19.54 9.88,18.36L13.41,14.83C14.59,13.66 14.59,11.76 13.41,10.59C13.02,10.2 13.02,9.56 13.41,9.17Z"/></svg>
-                    <span id="el-btnSocial">Bağlantılar</span>
-                </button>
-                <div class="social-menu" id="socialMenu">
-                    <div class="social-item">
-                        <div class="social-header">TikTok ▸</div>
-                        <div class="social-sub-list">
-                            <a class="social-link" href="https://www.tiktok.com/@fruittherapytv?_r=1&_t=ZS-972chLRsk9C" target="_blank" rel="noopener">Fruit Therapy</a>
-                            <a class="social-link" href="https://www.tiktok.com/@mfkgamesstudio?_r=1&_t=ZS-972ck7fFEjy" target="_blank" rel="noopener">mFk Games</a>
-                        </div>
-                    </div>
-                    <div class="social-item">
-                        <div class="social-header">X (Twitter) ▸</div>
-                        <div class="social-sub-list">
-                            <a class="social-link" href="https://x.com/mfkgamesstudio?s=11&t=v2SDbwto6wAJ5NtbH01bTw" target="_blank" rel="noopener">mFk Games</a>
-                        </div>
-                    </div>
-                    <div class="social-item">
-                        <div class="social-header">Instagram ▸</div>
-                        <div class="social-sub-list">
-                            <a class="social-link" href="https://www.instagram.com/mfkgamess?igsh=dml5bTNyeHVmcmhs&utm_source=qr" target="_blank" rel="noopener">mFk Games</a>
-                            <a class="social-link" href="https://www.instagram.com/fruittherapytv?igsh=MWZwOTd4cnpnMTBsdQ%3D%3D&utm_source=qr" target="_blank" rel="noopener">Fruit Therapy</a>
-                        </div>
-                    </div>
-                    <div class="social-item">
-                        <div class="social-header">YouTube ▸</div>
-                        <div class="social-sub-list">
-                            <a class="social-link" href="https://www.youtube.com/@mFkGamesStudio" target="_blank" rel="noopener">mFk Games</a>
-                            <a class="social-link" href="https://youtube.com/@fruittherapytv?si=Dwrbtfa-tMhNpDFq" target="_blank" rel="noopener">Fruit Therapy</a>
-                            <a class="social-link" href="https://youtube.com/@tinyloopword?si=S8yvkhF1vHMZAzk0" target="_blank" rel="noopener">Tinyloop</a>
-                        </div>
-                    </div>
-                </div>
+      <div class="social-wrap">
+        <button class="btn-modern btn-links" id="socialBtn" aria-haspopup="true" aria-expanded="false">
+          <svg viewBox="0 0 24 24"><path d="M10.59,13.41C11,13.8 11,14.44 10.59,14.83C10.2,15.22 9.56,15.22 9.17,14.83C7.22,12.88 7.22,9.71 9.17,7.76V7.76L12.71,4.22C14.66,2.27 17.83,2.27 19.78,4.22C21.73,6.17 21.73,9.34 19.78,11.29L18.29,12.78C18.3,11.96 18.17,11.14 17.89,10.36L18.36,9.88C19.54,8.71 19.54,6.81 18.36,5.64C17.19,4.46 15.29,4.46 14.12,5.64L10.59,9.17C9.41,10.34 9.41,12.24 10.59,13.41M13.41,9.17C13.8,8.78 14.44,8.78 14.83,9.17C16.78,11.12 16.78,14.29 14.83,16.24V16.24L11.29,19.78C9.34,21.73 6.17,21.73 4.22,19.78C2.27,17.83 2.27,14.66 4.22,12.71L5.71,11.22C5.7,12.04 5.83,12.86 6.11,13.64L5.64,14.12C4.46,15.29 4.46,17.19 5.64,18.36C6.81,19.54 8.71,19.54 9.88,18.36L13.41,14.83C14.59,13.66 14.59,11.76 13.41,10.59C13.02,10.2 13.02,9.56 13.41,9.17Z"/></svg>
+          <span id="el-btnSocial">Bağlantılar</span>
+        </button>
+        <div class="social-menu" id="socialMenu">
+          <div class="social-item">
+            <div class="social-header">TikTok ▸</div>
+            <div class="social-sub-list">
+              <a class="social-link" href="https://www.tiktok.com/@fruittherapytv?_r=1&_t=ZS-972chLRsk9C" target="_blank" rel="noopener">Fruit Therapy</a>
+              <a class="social-link" href="https://www.tiktok.com/@mfkgamesstudio?_r=1&_t=ZS-972ck7fFEjy" target="_blank" rel="noopener">mFk Games</a>
             </div>
-
-            <a href="mailto:mfkgames.support@gmail.com" class="btn-modern btn-contact">
-                <svg viewBox="0 0 24 24"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg>
-                <span id="el-btnContact">İletişim</span>
-            </a>
+          </div>
+          <div class="social-item">
+            <div class="social-header">X (Twitter) ▸</div>
+            <div class="social-sub-list">
+              <a class="social-link" href="https://x.com/mfkgamesstudio?s=11&t=v2SDbwto6wAJ5NtbH01bTw" target="_blank" rel="noopener">mFk Games</a>
+            </div>
+          </div>
+          <div class="social-item">
+            <div class="social-header">Instagram ▸</div>
+            <div class="social-sub-list">
+              <a class="social-link" href="https://www.instagram.com/mfkgamess?igsh=dml5bTNyeHVmcmhs&utm_source=qr" target="_blank" rel="noopener">mFk Games</a>
+              <a class="social-link" href="https://www.instagram.com/fruittherapytv?igsh=MWZwOTd4cnpnMTBsdQ%3D%3D&utm_source=qr" target="_blank" rel="noopener">Fruit Therapy</a>
+            </div>
+          </div>
+          <div class="social-item">
+            <div class="social-header">YouTube ▸</div>
+            <div class="social-sub-list">
+              <a class="social-link" href="https://www.youtube.com/@mFkGamesStudio" target="_blank" rel="noopener">mFk Games</a>
+              <a class="social-link" href="https://youtube.com/@fruittherapytv?si=Dwrbtfa-tMhNpDFq" target="_blank" rel="noopener">Fruit Therapy</a>
+              <a class="social-link" href="https://youtube.com/@tinyloopword?si=S8yvkhF1vHMZAzk0" target="_blank" rel="noopener">Tinyloop</a>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <a href="mailto:mfkgames.support@gmail.com" class="btn-modern btn-contact">
+        <svg viewBox="0 0 24 24"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg>
+        <span id="el-btnContact">İletişim</span>
+      </a>
     </div>
+  </div>
 
-    <!-- Sağ Bölüm: ANAKART VE DÖNEN OYUN EKRANLARI -->
-    <div class="showcase-stage">
+  <div class="showcase-stage">
+    <svg class="pcb-motherboard-svg" viewBox="0 0 540 520" fill="none">
+      <path d="M 380 40 L 380 180 L 440 240 L 510 240" stroke="#1d283f" stroke-width="2.5"/>
+      <path d="M 410 20 L 410 160 L 460 210 L 530 210" stroke="#253554" stroke-width="2"/>
+      <path d="M 120 40 L 120 100 L 70 150 L 70 420" stroke="#1e2c47" stroke-width="2.5"/>
+      <path d="M 150 20 L 150 90 L 95 145 L 95 440" stroke="#1a2336" stroke-width="2"/>
+      <path d="M 400 320 L 470 320 L 510 360 L 510 480" stroke="#243452" stroke-width="2"/>
+      <path d="M 370 340 L 450 340 L 485 375 L 485 500" stroke="#1d283f" stroke-width="2.5"/>
+      <circle cx="510" cy="240" r="3.5" fill="#00d2ff" opacity="0.6"/>
+      <circle cx="510" cy="360" r="3.5" fill="#25f488" opacity="0.6"/>
+      <circle cx="70" cy="420" r="3.5" fill="#ff2a85" opacity="0.6"/>
+    </svg>
 
-        <svg class="pcb-motherboard-svg" viewBox="0 0 540 520" fill="none">
-            <path d="M 380 40 L 380 180 L 440 240 L 510 240" stroke="#1d283f" stroke-width="2.5"/>
-            <path d="M 410 20 L 410 160 L 460 210 L 530 210" stroke="#253554" stroke-width="2"/>
-            <path d="M 120 40 L 120 100 L 70 150 L 70 420" stroke="#1e2c47" stroke-width="2.5"/>
-            <path d="M 150 20 L 150 90 L 95 145 L 95 440" stroke="#1a2336" stroke-width="2"/>
-            <path d="M 400 320 L 470 320 L 510 360 L 510 480" stroke="#243452" stroke-width="2"/>
-            <path d="M 370 340 L 450 340 L 485 375 L 485 500" stroke="#1d283f" stroke-width="2.5"/>
-            
-            <circle cx="510" cy="240" r="3.5" fill="#00d2ff" opacity="0.6"/>
-            <circle cx="510" cy="360" r="3.5" fill="#25f488" opacity="0.6"/>
-            <circle cx="70" cy="420" r="3.5" fill="#ff2a85" opacity="0.6"/>
-        </svg>
+    <div class="card-stage-container" id="stageContainer">
+      <div class="ghost-screen ghost-screen-1"></div>
+      <div class="ghost-screen ghost-screen-2"></div>
+      <div class="ghost-screen ghost-screen-3"></div>
 
-        <div class="card-stage-container" id="stageContainer">
-
-            <div class="ghost-screen ghost-screen-1"></div>
-            <div class="ghost-screen ghost-screen-2"></div>
-            <div class="ghost-screen ghost-screen-3"></div>
-
-            <!-- 1. Ekran (Üst Slot) -->
-            <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="arcade-screen slot-top" id="screenTop">
-                <div class="screen-hud-top">
-                    <div class="hud-left">
-                        <div class="health-bar"><div class="health-fill"></div></div>
-                        <span class="hud-coin">●</span>
-                    </div>
-                    <span class="hud-tag">ARCADE</span>
-                </div>
-                <div class="screen-inner">
-                    <div class="game-icon-box">
-                        <img src="" alt="" class="game-icon-img" id="iconTop">
-                    </div>
-                    <div class="game-info-col">
-                        <span class="game-meta-badge" id="badgeTop">OYUN</span>
-                        <div class="arcade-title" id="titleTop" style="color:var(--cyan)">OYUN</div>
-                        <div class="game-play-badge">Oyna <span>▶</span></div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- 2. Ekran (Alt Slot) -->
-            <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="arcade-screen slot-bottom" id="screenBottom">
-                <div class="screen-hud-top">
-                    <div class="hud-left">
-                        <div class="health-bar"><div class="health-fill" style="width:60%; background:#ff2a85;"></div></div>
-                        <span class="hud-coin">●</span>
-                    </div>
-                    <span class="hud-tag">RETRO</span>
-                </div>
-                <div class="screen-inner">
-                    <div class="game-icon-box">
-                        <img src="" alt="" class="game-icon-img" id="iconBottom">
-                    </div>
-                    <div class="game-info-col">
-                        <span class="game-meta-badge" id="badgeBottom">OYUN</span>
-                        <div class="arcade-title" id="titleBottom" style="color:var(--pink)">OYUN</div>
-                        <div class="game-play-badge">Oyna <span>▶</span></div>
-                    </div>
-                </div>
-            </a>
-
-            <!-- 3. Ekran (Merkez Slot) -->
-            <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="arcade-screen slot-center" id="screenCenter">
-                <div class="screen-hud-top">
-                    <div class="hud-left">
-                        <div class="health-bar"><div class="health-fill" style="width:90%; background:#25f488;"></div></div>
-                        <span class="hud-coin">●</span>
-                    </div>
-                    <span class="hud-tag">FEATURED</span>
-                </div>
-                <div class="screen-inner">
-                    <div class="game-icon-box">
-                        <img src="" alt="" class="game-icon-img" id="iconCenter">
-                    </div>
-                    <div class="game-info-col">
-                        <span class="game-meta-badge" id="badgeCenter" style="color:var(--green)">HOT GAME</span>
-                        <div class="arcade-title" id="titleCenter" style="color:var(--green)">OYUN</div>
-                        <div class="game-play-badge">Google Play <span>▶</span></div>
-                    </div>
-                </div>
-            </a>
-
+      <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="arcade-screen slot-top" id="screenTop">
+        <div class="screen-hud-top"><div class="hud-left"><div class="health-bar"><div class="health-fill"></div></div><span class="hud-coin">●</span></div><span class="hud-tag">ARCADE</span></div>
+        <div class="screen-inner">
+          <div class="game-icon-box"><img src="" alt="" class="game-icon-img"></div>
+          <div class="game-info-col">
+            <span class="game-meta-badge">OYUN</span>
+            <div class="arcade-title">OYUN</div>
+            <div class="game-play-badge">Oyna <span>▶</span></div>
+          </div>
         </div>
-    </div>
+      </a>
 
+      <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="arcade-screen slot-bottom" id="screenBottom">
+        <div class="screen-hud-top"><div class="hud-left"><div class="health-bar"><div class="health-fill"></div></div><span class="hud-coin">●</span></div><span class="hud-tag">RETRO</span></div>
+        <div class="screen-inner">
+          <div class="game-icon-box"><img src="" alt="" class="game-icon-img"></div>
+          <div class="game-info-col">
+            <span class="game-meta-badge">OYUN</span>
+            <div class="arcade-title">OYUN</div>
+            <div class="game-play-badge">Oyna <span>▶</span></div>
+          </div>
+        </div>
+      </a>
+
+      <a href="https://play.google.com/store/apps/developer?id=mFk+Games" target="_blank" rel="noopener" class="arcade-screen slot-center" id="screenCenter">
+        <div class="screen-hud-top"><div class="hud-left"><div class="health-bar"><div class="health-fill"></div></div><span class="hud-coin">●</span></div><span class="hud-tag">FEATURED</span></div>
+        <div class="screen-inner">
+          <div class="game-icon-box"><img src="" alt="" class="game-icon-img"></div>
+          <div class="game-info-col">
+            <span class="game-meta-badge">HOT GAME</span>
+            <div class="arcade-title">OYUN</div>
+            <div class="game-play-badge">Google Play <span>▶</span></div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
 </main>
 
-<!-- ── FOOTER ── -->
 <footer>
-    <p>© 2026 mFk Games — <span id="el-copyright">Tüm hakları saklıdır.</span>
-    <span style="opacity: 0.3; margin: 0 4px;">|</span>
-    <a href="https://mfkgames.github.io/privacy-policy.html" target="_blank" id="elPrivacy">Gizlilik Politikası</a>
-    <span style="opacity: 0.3; margin: 0 4px;">|</span>
-    <a href="https://mfkgames.github.io/terms-of-service.html" target="_blank" id="elTerms">Hizmet Şartları</a></p>
+  <p>© 2026 mFk Games — <span id="el-copyright">Tüm hakları saklıdır.</span>
+  <span style="opacity:.3;margin:0 4px">|</span>
+  <a href="https://mfkgames.github.io/privacy-policy.html" target="_blank" rel="noopener" id="elPrivacy">Gizlilik Politikası</a>
+  <span style="opacity:.3;margin:0 4px">|</span>
+  <a href="https://mfkgames.github.io/terms-of-service.html" target="_blank" rel="noopener" id="elTerms">Hizmet Şartları</a></p>
 </footer>
 
+<div class="consent" id="consent" role="dialog" aria-live="polite" hidden>
+  <p><span id="consentText"></span><a href="https://mfkgames.github.io/privacy-policy.html" target="_blank" rel="noopener" id="consentLink"></a></p>
+  <div class="consent-btns">
+    <button type="button" class="btn-modern c-no" id="consentNo"></button>
+    <button type="button" class="btn-modern c-yes" id="consentYes"></button>
+  </div>
+</div>
+
 <script>
-// ── SİTEDE RASTGELE GEZİNEN NOKTACIKLAR ──
-(function() {
-    var canvas = document.getElementById('particleCanvas');
-    var ctx = canvas.getContext('2d');
-    var particles = [];
-    var particleCount = window.innerWidth < 600 ? 55 : 95;
-    var colors = ['#00d2ff', '#ff2a85', '#25f488', '#f5c518', '#b537f2'];
-
-    function resize() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    window.addEventListener('resize', resize);
-    resize();
-
-    function Particle() {
-        this.reset();
-    }
-
-    Particle.prototype.reset = function() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.size = Math.random() * 2.8 + 2;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.color = colors[Math.floor(Math.random() * colors.length)];
-        this.alpha = Math.random() * 0.5 + 0.3;
-        this.pulse = Math.random() * 0.03 + 0.01;
-    };
-
-    Particle.prototype.update = function() {
-        this.x += this.vx;
-        this.y += this.vy;
-
-        if (this.x < 0) this.x = canvas.width;
-        if (this.x > canvas.width) this.x = 0;
-        if (this.y < 0) this.y = canvas.height;
-        if (this.y > canvas.height) this.y = 0;
-
-        this.alpha += Math.sin(Date.now() * 0.002) * this.pulse;
-        if (this.alpha > 0.8) this.alpha = 0.8;
-        if (this.alpha < 0.25) this.alpha = 0.25;
-    };
-
-    Particle.prototype.draw = function() {
-        ctx.save();
-        ctx.globalAlpha = this.alpha;
-        ctx.fillStyle = this.color;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = this.color;
-        ctx.beginPath();
-        ctx.rect(this.x, this.y, this.size, this.size);
-        ctx.fill();
-        ctx.restore();
-    };
-
-    for (var i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
-    }
-
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (var i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-        }
-        requestAnimationFrame(animate);
-    }
-    animate();
+// ── GEZİNEN NOKTACIKLAR ──
+(function(){
+  var canvas=document.getElementById('particleCanvas'),ctx=canvas.getContext('2d'),particles=[];
+  var count=window.innerWidth<600?40:80;
+  var colors=['#00d2ff','#ff2a85','#25f488','#f5c518','#b537f2'];
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+  window.addEventListener('resize',resize);resize();
+  function Particle(){this.reset()}
+  Particle.prototype.reset=function(){
+    this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;
+    this.size=Math.random()*2.8+2;this.vx=(Math.random()-.5)*.8;this.vy=(Math.random()-.5)*.8;
+    this.color=colors[Math.floor(Math.random()*colors.length)];
+    this.alpha=Math.random()*.5+.3;this.pulse=Math.random()*.03+.01;
+  };
+  Particle.prototype.update=function(){
+    this.x+=this.vx;this.y+=this.vy;
+    if(this.x<0)this.x=canvas.width;if(this.x>canvas.width)this.x=0;
+    if(this.y<0)this.y=canvas.height;if(this.y>canvas.height)this.y=0;
+    this.alpha+=Math.sin(Date.now()*.002)*this.pulse;
+    if(this.alpha>.8)this.alpha=.8;if(this.alpha<.25)this.alpha=.25;
+  };
+  Particle.prototype.draw=function(){
+    ctx.globalAlpha=this.alpha;ctx.fillStyle=this.color;ctx.fillRect(this.x,this.y,this.size,this.size);
+  };
+  for(var i=0;i<count;i++)particles.push(new Particle());
+  function animate(){
+    if(document.hidden){requestAnimationFrame(animate);return}
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    for(var i=0;i<particles.length;i++){particles[i].update();particles[i].draw()}
+    ctx.globalAlpha=1;
+    requestAnimationFrame(animate);
+  }
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){particles.forEach(function(p){p.draw()})}
+  else{animate()}
 })();
 
-// ── ADS.JSON YEDEK LİSTESİ ──
-var fallbackGames = [
-  {"title": "Area Capture", "pkg": "com.mfk.areacapture", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.areacapture.png"},
-  {"title": "BuumRom", "pkg": "com.mfk.buumrom", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.buumrom.png"},
-  {"title": "Breakout", "pkg": "com.mfk.breakout", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.breakout.png"},
-  {"title": "ChessBorn", "pkg": "com.mfk.chessborn", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.chessborn.png"},
-  {"title": "Container", "pkg": "com.mfk.container", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.container.png"},
-  {"title": "Destan", "pkg": "com.mfk.destan", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.destan.png"},
-  {"title": "Escape", "pkg": "com.mfk.escape", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.escape.png"},
-  {"title": "Fall Eternal", "pkg": "com.mfk.falleternal", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.falleternal.png"},
-  {"title": "ForceNeo", "pkg": "com.mfk.forceneo", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.forceneo.png"},
-  {"title": "HexFaal", "pkg": "com.mfk.hexfaal", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.hexfaal.png"},
-  {"title": "Hexoria", "pkg": "com.mfk.hexoria", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.hexoria.png"},
-  {"title": "Legions Rush", "pkg": "com.mfk.legionsrush", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.legionsrush.png"},
-  {"title": "Limit Area", "pkg": "com.mfk.limitarea", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.limitarea.png"},
-  {"title": "Locked", "pkg": "com.mfk.locked", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.locked.png"},
-  {"title": "LiquidLab", "pkg": "com.mfk.liquidlab", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.liquidlab.png"},
-  {"title": "MazeRush", "pkg": "com.mfk.mazerush", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.mazerush.png"},
-  {"title": "Metro Dash", "pkg": "com.mfk.metrodash", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.metrodash.png"},
-  {"title": "mFk Farm", "pkg": "com.mfk.mfkfarm", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.mfkfarm.png"},
-  {"title": "Mital", "pkg": "com.mfk.mital", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.mital.png"},
-  {"title": "Neon Cave", "pkg": "com.mfk.neoncave", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.neoncave.png"},
-  {"title": "Neon Dodge", "pkg": "com.mfk.neondodge", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.neondodge.png"},
-  {"title": "NikoX", "pkg": "com.mfk.nikox", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.nikox.png"},
-  {"title": "Nova Storm", "pkg": "com.mfk.novastrom", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.novastrom.png"},
-  {"title": "Raider Protocol", "pkg": "com.mfk.raiderprotocol", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.raiderprotocol.png"},
-  {"title": "RetroStride", "pkg": "com.mfk.retrostride", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.retrostride.png"},
-  {"title": "Shadow Loop", "pkg": "com.mfk.shadowloop", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.shadowloop.png"},
-  {"title": "Sinir", "pkg": "com.mfk.sinir", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.sinir.png"},
-  {"title": "Sky Defender", "pkg": "com.mfk.SkyDefender", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.SkyDefender.png"},
-  {"title": "Sky Strike", "pkg": "com.mfk.skystrike", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.skystrike.png"},
-  {"title": "SuperCar", "pkg": "com.mfk.supercar", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.supercar.png"},
-  {"title": "TimeLoock", "pkg": "com.mfk.timeloock", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.timeloock.png"},
-  {"title": "Troll", "pkg": "com.mfk.troll", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.troll.png"},
-  {"title": "TurfWars", "pkg": "com.mfk.TurfWars", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.TurfWars.png"},
-  {"title": "Void Runner", "pkg": "com.mfk.VoidRunner", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.VoidRunner.png"},
-  {"title": "Void Crawler", "pkg": "com.mfk.voidcrawler", "category": "oyun", "icon": "https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/com.mfk.voidcrawler.png"}
-];
+// ── YEDEK OYUN LİSTESİ (ads.json gelmezse) ──
+var ICON_BASE='https://raw.githubusercontent.com/mFkGames/mfkgames.github.io/main/icons/';
+var fallbackGames=[
+["Area Capture","areacapture"],["BuumRom","buumrom"],["Breakout","breakout"],["ChessBorn","chessborn"],["Container","container"],
+["Destan","destan"],["Escape","escape"],["Fall Eternal","falleternal"],["ForceNeo","forceneo"],["HexFaal","hexfaal"],
+["Hexoria","hexoria"],["Legions Rush","legionsrush"],["Limit Area","limitarea"],["Locked","locked"],["LiquidLab","liquidlab"],
+["MazeRush","mazerush"],["Metro Dash","metrodash"],["mFk Farm","mfkfarm"],["Mital","mital"],["Neon Cave","neoncave"],
+["Neon Dodge","neondodge"],["NikoX","nikox"],["Nova Storm","novastrom"],["Raider Protocol","raiderprotocol"],["RetroStride","retrostride"],
+["Shadow Loop","shadowloop"],["Sinir","sinir"],["Sky Defender","SkyDefender"],["Sky Strike","skystrike"],["SuperCar","supercar"],
+["TimeLoock","timeloock"],["Troll","troll"],["TurfWars","TurfWars"],["Void Runner","VoidRunner"],["Void Crawler","voidcrawler"]
+].map(function(g){var p='com.mfk.'+g[1];return{title:g[0],pkg:p,category:'oyun',icon:ICON_BASE+p+'.png'}});
 
-var loadedGames = fallbackGames;
-var currentTopIndex = 0;
-
-fetch('ads.json')
-  .then(function(res) { return res.json(); })
-  .then(function(data) {
-      if (Array.isArray(data)) {
-          var filtered = data.filter(function(item) { return item.category === "oyun"; });
-          if (filtered.length > 0) loadedGames = filtered;
-          syncGamesToShowcase();
-      }
-  })
-  .catch(function() {
-      syncGamesToShowcase();
-  });
-
-var screens = [
-    document.getElementById('screenTop'),
-    document.getElementById('screenCenter'),
-    document.getElementById('screenBottom')
-];
-
-var slotClasses = ['slot-top', 'slot-center', 'slot-bottom'];
-var currentRotationStep = 0;
-
-function syncGamesToShowcase() {
-    if (!loadedGames || loadedGames.length === 0) return;
-    var len = loadedGames.length;
-
-    var slotGames = [
-        loadedGames[currentTopIndex % len],
-        loadedGames[(currentTopIndex + 1) % len],
-        loadedGames[(currentTopIndex + 2) % len]
-    ];
-
-    screens.forEach(function(sc, idx) {
-        var game = slotGames[idx];
-        var titleEl = sc.querySelector('.arcade-title');
-        var iconEl = sc.querySelector('.game-icon-img');
-        
-        sc.href = "https://play.google.com/store/apps/details?id=" + game.pkg;
-        titleEl.textContent = game.title.toUpperCase();
-        titleEl.setAttribute('title', game.title);
-        iconEl.src = game.icon;
-        iconEl.alt = game.title;
-    });
-}
-
-function rotateShowcase() {
-    currentRotationStep = (currentRotationStep + 1) % 3;
-    screens.forEach(function(sc, idx) {
-        var sIndex = (idx + currentRotationStep) % 3;
-        sc.classList.remove('slot-top', 'slot-center', 'slot-bottom');
-        sc.classList.add(slotClasses[sIndex]);
-    });
-
-    currentTopIndex = (currentTopIndex + 1) % loadedGames.length;
-    syncGamesToShowcase();
-}
-
-var rotateInterval = setInterval(rotateShowcase, 3800);
-
-screens.forEach(function(sc) {
-    sc.addEventListener('click', function() {
-        clearInterval(rotateInterval);
-        rotateInterval = setInterval(rotateShowcase, 3800);
-    });
-});
-
-// ── 10 DİL ÇEVİRİLERİ ──
-var i18n = {
-    tr: { label: "TR", badge: "▶ OYUN GELİŞTİRİCİ", heroSub: "Bağımsız Mobil Oyun Geliştiricisi", heroDesc: "Mobil platformlar için eğlenceli, sade ve her yaşa uygun oyunlar geliştiriyorum. Tasarımdan kodlamaya tüm süreci üstleniyor, 2D-3D piksel art tarzındaki retro projelerimle nostaljik bir indie oyun deneyimi sunuyorum.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Bağlantılar", btnContact: "İletişim", privacy: "Gizlilik Politikası", terms: "Hizmet Şartları", copyright: "Tüm hakları saklıdır.", dir: "ltr" },
-    en: { label: "EN", badge: "▶ PLAYER ONE", heroSub: "Indie Mobile Game Developer", heroDesc: "Indie developer crafting fun, minimalist retro experiences for mobile. Covering everything from art design to code with nostalgic pixel art touch.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Links", btnContact: "Contact", privacy: "Privacy Policy", terms: "Terms of Service", copyright: "All rights reserved.", dir: "ltr" },
-    de: { label: "DE", badge: "▶ SPIELER EINS", heroSub: "Spielentwickler", heroDesc: "Unabhängiger Entwickler von mobilen Spielen. Ich liebe es, unterhaltsame Erlebnisse für alle Altersgruppen zu schaffen.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Links", btnContact: "Kontakt", privacy: "Datenschutzerklärung", terms: "Nutzungsbedingungen", copyright: "Alle Rechte vorbehalten.", dir: "ltr" },
-    fr: { label: "FR", badge: "▶ JOUEUR UN", heroSub: "Développeur de Jeux", heroDesc: "Développeur indépendant de jeux mobiles. J'adore créer des expériences amusantes et simples pour tous les âges.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Liens", btnContact: "Contact", privacy: "Politique de confidentialité", terms: "Conditions d'utilisation", copyright: "Tous droits réservés.", dir: "ltr" },
-    es: { label: "ES", badge: "▶ JUGADOR UNO", heroSub: "Desarrollador de Juegos", heroDesc: "Desarrollador independiente de juegos móviles. Me encanta crear experiencias divertidas y simples para todas las edades.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Enlaces", btnContact: "Contacto", privacy: "Política de privacidad", terms: "Términos del servicio", copyright: "Todos los derechos reservados.", dir: "ltr" },
-    it: { label: "IT", badge: "▶ GIOCATORE UNO", heroSub: "Sviluppatore di Giochi", heroDesc: "Sviluppatore indipendente di giochi mobile. Amo creare experiences divertenti e semplici per tutte le età.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Link", btnContact: "Contatti", privacy: "Informativa sulla privacy", terms: "Termini di servizio", copyright: "Tutti i diritti riservati.", dir: "ltr" },
-    pt: { label: "PT", badge: "▶ JOGADOR UM", heroSub: "Desenvolvedor de Jogos", heroDesc: "Desenvolvedor independente de jogos mobile. Adoro criar experiências divertidas e simples para todas as idades.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Links", btnContact: "Contato", privacy: "Política de privacidade", terms: "Termos de serviço", copyright: "Todos os direitos reservados.", dir: "ltr" },
-    ru: { label: "RU", badge: "▶ ИГРОК ОДИН", heroSub: "Разработчик игр", heroDesc: "Независимый разработчик mobil oyunlar. Люблю создавать весёлые и простые игры для любого возраста.", btnPlay: "Play", btnApple: "Apple", btnSocial: "Ссылки", btnContact: "Контакт", privacy: "Политика конфиденциальности", terms: "Условия использования", copyright: "Все права защищены.", dir: "ltr" },
-    ja: { label: "JP", badge: "▶ プレイヤーワン", heroSub: "ゲーム開発者", heroDesc: "モバイルゲームを開発するインディー開発者。楽しくシンプルな体験を提供します。", btnPlay: "Play", btnApple: "Apple", btnSocial: "リンク", btnContact: "お問い合わせ", privacy: "プライバシーポリシー", terms: "利用規約", copyright: "All rights reserved.", dir: "ltr" },
-    ar: { label: "AR", badge: "▶ اللاعب الأول", heroSub: "مطور ألعاب", heroDesc: "مطور مستقل للألعاب المحmولة. أحب إنشاء تجارب ممتعة وبسيطة لجميع الأعمار.", btnPlay: "Play", btnApple: "Apple", btnSocial: "روابط", btnContact: "تواصل", privacy: "سياسة الخصوصية", terms: "شروط الخدمة", copyright: "جميع الحقوق محفوظة.", dir: "rtl" }
+// ── 10 DİL ──
+var i18n={
+ tr:{label:"TR",badge:"▶ OYUN GELİŞTİRİCİ",heroSub:"Bağımsız Mobil Oyun Geliştiricisi",heroDesc:"Mobil platformlar için eğlenceli, sade ve her yaşa uygun oyunlar geliştiriyorum. Tasarımdan kodlamaya tüm süreci üstleniyor, 2D-3D piksel art tarzındaki retro projelerimle nostaljik bir indie oyun deneyimi sunuyorum.",btnPlay:"Play",btnApple:"Apple",btnSocial:"Bağlantılar",btnContact:"İletişim",privacy:"Gizlilik Politikası",terms:"Hizmet Şartları",copyright:"Tüm hakları saklıdır.",dir:"ltr"},
+ en:{label:"EN",badge:"▶ PLAYER ONE",heroSub:"Indie Mobile Game Developer",heroDesc:"Indie developer crafting fun, minimalist retro experiences for mobile. Covering everything from art design to code with nostalgic pixel art touch.",btnPlay:"Play",btnApple:"Apple",btnSocial:"Links",btnContact:"Contact",privacy:"Privacy Policy",terms:"Terms of Service",copyright:"All rights reserved.",dir:"ltr"},
+ de:{label:"DE",badge:"▶ SPIELER EINS",heroSub:"Spielentwickler",heroDesc:"Unabhängiger Entwickler von mobilen Spielen. Ich liebe es, unterhaltsame Erlebnisse für alle Altersgruppen zu schaffen.",btnPlay:"Play",btnApple:"Apple",btnSocial:"Links",btnContact:"Kontakt",privacy:"Datenschutzerklärung",terms:"Nutzungsbedingungen",copyright:"Alle Rechte vorbehalten.",dir:"ltr"},
+ fr:{label:"FR",badge:"▶ JOUEUR UN",heroSub:"Développeur de Jeux",heroDesc:"Développeur indépendant de jeux mobiles. J'adore créer des expériences amusantes et simples pour tous les âges.",btnPlay:"Play",btnApple:"Apple",btnSocial:"Liens",btnContact:"Contact",privacy:"Politique de confidentialité",terms:"Conditions d'utilisation",copyright:"Tous droits réservés.",dir:"ltr"},
+ es:{label:"ES",badge:"▶ JUGADOR UNO",heroSub:"Desarrollador de Juegos",heroDesc:"Desarrollador independiente de juegos móviles. Me encanta crear experiencias divertidas y simples para todas las edades.",btnPlay:"Play",btnApple:"Apple",btnSocial:"Enlaces",btnContact:"Contacto",privacy:"Política de privacidad",terms:"Términos del servicio",copyright:"Todos los derechos reservados.",dir:"ltr"},
+ it:{label:"IT",badge:"▶ GIOCATORE UNO",heroSub:"Sviluppatore di Giochi",heroDesc:"Sviluppatore indipendente di giochi mobile. Amo creare esperienze divertenti e semplici per tutte le età.",btnPlay:"Play",btnApple:"Apple",btnSocial:"Link",btnContact:"Contatti",privacy:"Informativa sulla privacy",terms:"Termini di servizio",copyright:"Tutti i diritti riservati.",dir:"ltr"},
+ pt:{label:"PT",badge:"▶ JOGADOR UM",heroSub:"Desenvolvedor de Jogos",heroDesc:"Desenvolvedor independente de jogos mobile. Adoro criar experiências divertidas e simples para todas as idades.",btnPlay:"Play",btnApple:"Apple",btnSocial:"Links",btnContact:"Contato",privacy:"Política de privacidade",terms:"Termos de serviço",copyright:"Todos os direitos reservados.",dir:"ltr"},
+ ru:{label:"RU",badge:"▶ ИГРОК ОДИН",heroSub:"Разработчик игр",heroDesc:"Независимый разработчик мобильных игр. Люблю создавать весёлые и простые игры для любого возраста.",btnPlay:"Play",btnApple:"Apple",btnSocial:"Ссылки",btnContact:"Контакт",privacy:"Политика конфиденциальности",terms:"Условия использования",copyright:"Все права защищены.",dir:"ltr"},
+ ja:{label:"JP",badge:"▶ プレイヤーワン",heroSub:"ゲーム開発者",heroDesc:"モバイルゲームを開発するインディー開発者。楽しくシンプルな体験を提供します。",btnPlay:"Play",btnApple:"Apple",btnSocial:"リンク",btnContact:"お問い合わせ",privacy:"プライバシーポリシー",terms:"利用規約",copyright:"All rights reserved.",dir:"ltr"},
+ ar:{label:"AR",badge:"▶ اللاعب الأول",heroSub:"مطور ألعاب",heroDesc:"مطور مستقل للألعاب المحمولة. أحب إنشاء تجارب ممتعة وبسيطة لجميع الأعمار.",btnPlay:"Play",btnApple:"Apple",btnSocial:"روابط",btnContact:"تواصل",privacy:"سياسة الخصوصية",terms:"شروط الخدمة",copyright:"جميع الحقوق محفوظة.",dir:"rtl"}
 };
 
-var langBtn = document.getElementById('langBtn');
-var langDropdown = document.getElementById('langDropdown');
-var langLabel = document.getElementById('langLabel');
-var socialBtn = document.getElementById('socialBtn');
-var socialMenu = document.getElementById('socialMenu');
+var cardT={
+ play:{tr:"Oyna",en:"Play",de:"Spielen",fr:"Jouer",es:"Jugar",it:"Gioca",pt:"Jogar",ru:"Играть",ja:"プレイ",ar:"العب"},
+ game:{tr:"OYUN",en:"GAME",de:"SPIEL",fr:"JEU",es:"JUEGO",it:"GIOCO",pt:"JOGO",ru:"ИГРА",ja:"ゲーム",ar:"لعبة"},
+ hot:{tr:"POPÜLER",en:"HOT GAME",de:"BELIEBT",fr:"POPULAIRE",es:"POPULAR",it:"POPOLARE",pt:"POPULAR",ru:"ХИТ",ja:"人気",ar:"شائع"}
+};
 
-langBtn.addEventListener('click', function(e) {
+// ── KART SİSTEMİ: oyun karta bağlı, renk slota bağlı ──
+var loadedGames=fallbackGames.slice();
+var cards=['screenTop','screenCenter','screenBottom'].map(function(id){return document.getElementById(id)});
+var slotNames=['top','center','bottom'];
+var slotText={top:{tag:'ARCADE',badge:'game'},center:{tag:'FEATURED',badge:'hot'},bottom:{tag:'RETRO',badge:'game'}};
+var nextIdx=3,currentLang='tr',rotateInterval=null;
+var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var ICON_FALLBACK='data:image/svg+xml;utf8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#151a28"/><text x="32" y="43" font-size="28" text-anchor="middle" fill="#94a3b8">▶</text></svg>');
+
+var PKG_CASE={skydefender:'SkyDefender',turfwars:'TurfWars',voidrunner:'VoidRunner',lullababy:'LullaBaby',smartremote:'SmartRemote'};
+function fixPkg(p){
+  var m=/^com\.mfk\.(.+)$/.exec(p||'');
+  return (m&&PKG_CASE[m[1].toLowerCase()])?'com.mfk.'+PKG_CASE[m[1].toLowerCase()]:(p||'');
+}
+function fillCard(sc,game){
+  var img=sc.querySelector('.game-icon-img'),title=sc.querySelector('.arcade-title');
+  sc.href=game.url||game.link||game.playUrl||game.storeUrl||(game.pkg?'https://play.google.com/store/apps/details?id='+fixPkg(game.pkg):'https://play.google.com/store/apps/developer?id=mFk+Games');
+  title.textContent=game.title.toUpperCase();
+  title.setAttribute('title',game.title);
+  var list=[],p=fixPkg(game.pkg),i=0;
+  ['icon','image','img','iconUrl'].forEach(function(k){if(game[k])list.push(game[k])});
+  if(p){list.push('icons/'+p+'.png','https://mfkgames.github.io/icons/'+p+'.png',ICON_BASE+p+'.png')}
+  img.alt=game.title;
+  img.onerror=null;
+  img.src=ICON_FALLBACK;
+  (function tryIcon(k){
+    if(k>=list.length)return;
+    var t=new Image();
+    t.onload=function(){if(img.alt===game.title)img.src=t.src};
+    t.onerror=function(){tryIcon(k+1)};
+    t.src=list[k];
+  })(0);
+}
+
+function paintCard(sc){
+  var s=slotNames[sc._slot],st=slotText[s];
+  slotNames.forEach(function(n){sc.classList.remove('slot-'+n)});
+  sc.classList.add('slot-'+s);
+  sc.querySelector('.hud-tag').textContent=st.tag;
+  sc.querySelector('.game-meta-badge').textContent=cardT[st.badge][currentLang]||cardT[st.badge].en;
+  var play=s==='center'?'Google Play':(cardT.play[currentLang]||cardT.play.en);
+  sc.querySelector('.game-play-badge').firstChild.nodeValue=play+' ';
+}
+
+function rotateShowcase(){
+  if(document.hidden)return;
+  cards.forEach(function(sc){
+    var wraps=sc._slot===2;
+    sc._slot=(sc._slot+1)%3;
+    paintCard(sc);
+    if(wraps){
+      var g=loadedGames[nextIdx++%loadedGames.length];
+      var nx=loadedGames[nextIdx%loadedGames.length];
+      if(nx&&nx.icon){new Image().src=nx.icon}
+      sc.classList.add('swap');
+      setTimeout(function(){fillCard(sc,g);sc.classList.remove('swap')},300);
+    }
+  });
+}
+
+function startRotation(){
+  clearInterval(rotateInterval);
+  if(!reduceMotion)rotateInterval=setInterval(rotateShowcase,3800);
+}
+
+// ── MENÜLER ──
+var langBtn=document.getElementById('langBtn');
+var langDropdown=document.getElementById('langDropdown');
+var langLabel=document.getElementById('langLabel');
+var socialBtn=document.getElementById('socialBtn');
+var socialMenu=document.getElementById('socialMenu');
+var langOptions=document.querySelectorAll('.lang-option');
+
+function closeMenus(){
+  langDropdown.classList.remove('open');socialMenu.classList.remove('open');
+  langBtn.setAttribute('aria-expanded','false');socialBtn.setAttribute('aria-expanded','false');
+}
+function toggleMenu(menu,btn){
+  var willOpen=!menu.classList.contains('open');
+  closeMenus();
+  if(willOpen){menu.classList.add('open');btn.setAttribute('aria-expanded','true')}
+}
+langBtn.addEventListener('click',function(e){e.stopPropagation();toggleMenu(langDropdown,langBtn)});
+socialBtn.addEventListener('click',function(e){e.stopPropagation();toggleMenu(socialMenu,socialBtn)});
+document.addEventListener('click',closeMenus);
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMenus()});
+langDropdown.addEventListener('click',function(e){e.stopPropagation()});
+socialMenu.addEventListener('click',function(e){e.stopPropagation()});
+
+document.querySelectorAll('.social-header').forEach(function(h){
+  h.setAttribute('tabindex','0');h.setAttribute('role','button');
+  function tog(e){
     e.stopPropagation();
-    socialMenu.classList.remove('open');
-    langDropdown.classList.toggle('open');
+    var it=h.parentNode,was=it.classList.contains('open');
+    document.querySelectorAll('.social-item.open').forEach(function(x){x.classList.remove('open')});
+    if(!was)it.classList.add('open');
+  }
+  h.addEventListener('click',tog);
+  h.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();tog(e)}});
 });
 
-socialBtn.addEventListener('click', function(e) {
-    e.stopPropagation();
-    langDropdown.classList.remove('open');
-    socialMenu.classList.toggle('open');
+function applyLang(lang,save){
+  var t=i18n[lang];if(!t)return;
+  currentLang=lang;
+  langLabel.textContent=t.label;
+  document.getElementById('el-badge').textContent=t.badge;
+  document.getElementById('el-heroSub').textContent=t.heroSub;
+  document.getElementById('el-heroDesc').textContent=t.heroDesc;
+  document.getElementById('el-btnPlay').textContent=t.btnPlay;
+  document.getElementById('el-btnApple').textContent=t.btnApple;
+  document.getElementById('el-btnSocial').textContent=t.btnSocial;
+  document.getElementById('el-btnContact').textContent=t.btnContact;
+  document.getElementById('elPrivacy').textContent=t.privacy;
+  document.getElementById('elTerms').textContent=t.terms;
+  document.getElementById('el-copyright').textContent=t.copyright;
+  document.documentElement.setAttribute('lang',lang);
+  document.documentElement.setAttribute('dir',t.dir);
+  document.title=t.heroSub+' — mFk Games';
+  document.querySelector('meta[name="description"]').setAttribute('content',t.heroDesc);
+  langOptions.forEach(function(o){o.classList.toggle('active',o.getAttribute('data-lang')===lang)});
+  cards.forEach(paintCard);
+  consentLang(lang);
+  if(save){try{localStorage.setItem('mfk_lang',lang)}catch(e){}}
+}
+
+langOptions.forEach(function(opt){
+  opt.setAttribute('tabindex','0');
+  function pick(){applyLang(opt.getAttribute('data-lang'),true);closeMenus()}
+  opt.addEventListener('click',pick);
+  opt.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();pick()}});
 });
 
-document.addEventListener('click', function() {
-    langDropdown.classList.remove('open');
-    socialMenu.classList.remove('open');
+// ── ÇEREZ ONAYI: GA4 yalnızca "Kabul et" sonrası yüklenir ──
+var GA_ID='G-9ZEW07PZZ1';
+var consentT={
+ tr:{t:"Ziyaretçi istatistikleri için Google Analytics çerezleri kullanıyoruz. Yalnızca kabul ederseniz yüklenir.",y:"Kabul et",n:"Reddet",l:"Gizlilik Politikası",p:"Çerez Tercihleri"},
+ en:{t:"We use Google Analytics cookies for visitor statistics. They load only if you accept.",y:"Accept",n:"Decline",l:"Privacy Policy",p:"Cookie Settings"},
+ de:{t:"Wir verwenden Google-Analytics-Cookies für Besucherstatistiken. Sie werden nur mit Ihrer Zustimmung geladen.",y:"Akzeptieren",n:"Ablehnen",l:"Datenschutzerklärung",p:"Cookie-Einstellungen"},
+ fr:{t:"Nous utilisons des cookies Google Analytics pour les statistiques de visite. Ils ne sont chargés qu'avec votre accord.",y:"Accepter",n:"Refuser",l:"Politique de confidentialité",p:"Préférences cookies"},
+ es:{t:"Usamos cookies de Google Analytics para estadísticas de visitas. Solo se cargan si aceptas.",y:"Aceptar",n:"Rechazar",l:"Política de privacidad",p:"Preferencias de cookies"},
+ it:{t:"Usiamo i cookie di Google Analytics per le statistiche dei visitatori. Vengono caricati solo se accetti.",y:"Accetta",n:"Rifiuta",l:"Informativa sulla privacy",p:"Preferenze cookie"},
+ pt:{t:"Usamos cookies do Google Analytics para estatísticas de visitas. Só são carregados se você aceitar.",y:"Aceitar",n:"Recusar",l:"Política de privacidade",p:"Preferências de cookies"},
+ ru:{t:"Мы используем cookie Google Analytics для статистики посещений. Они загружаются только с вашего согласия.",y:"Принять",n:"Отклонить",l:"Политика конфиденциальности",p:"Настройки cookie"},
+ ja:{t:"アクセス統計のためGoogle Analyticsのクッキーを使用します。同意した場合のみ読み込まれます。",y:"同意する",n:"拒否",l:"プライバシーポリシー",p:"Cookie設定"},
+ ar:{t:"نستخدم ملفات تعريف الارتباط الخاصة بـ Google Analytics لإحصاءات الزوار. لا يتم تحميلها إلا بموافقتك.",y:"قبول",n:"رفض",l:"سياسة الخصوصية",p:"إعدادات الكوكيز"}
+};
+var consentBox=document.getElementById('consent');
+
+function loadGA(){
+  if(window._gaLoaded)return;
+  window._gaLoaded=true;
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments)};
+  gtag('js',new Date());
+  gtag('config',GA_ID);
+  var s=document.createElement('script');
+  s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;
+  document.head.appendChild(s);
+}
+function consentLang(lang){
+  var c=consentT[lang]||consentT.en;
+  document.getElementById('consentText').textContent=c.t;
+  document.getElementById('consentLink').textContent=c.l;
+  document.getElementById('consentYes').textContent=c.y;
+  document.getElementById('consentNo').textContent=c.n;
+}
+function showConsent(){
+  consentBox.hidden=false;
+  document.body.style.paddingBottom='calc(env(safe-area-inset-bottom,0px) + '+consentBox.offsetHeight+'px)';
+}
+function hideConsent(){
+  consentBox.hidden=true;
+  document.body.style.paddingBottom='';
+}
+function setConsent(v){
+  try{localStorage.setItem('mfk_consent',v)}catch(e){}
+  if(v==='yes')loadGA();
+  hideConsent();
+}
+document.getElementById('consentYes').addEventListener('click',function(){setConsent('yes')});
+document.getElementById('consentNo').addEventListener('click',function(){setConsent('no')});
+window.addEventListener('resize',function(){if(!consentBox.hidden)showConsent()});
+
+// ── BAŞLANGIÇ: yedek listeyle hemen doldur, sonra ads.json ──
+cards.forEach(function(sc,i){
+  sc._slot=i;
+  fillCard(sc,loadedGames[i]);
+  sc.addEventListener('click',startRotation);
 });
 
-langDropdown.addEventListener('click', function(e) { e.stopPropagation(); });
-socialMenu.addEventListener('click', function(e) { e.stopPropagation(); });
+var saved=null;try{saved=localStorage.getItem('mfk_lang')}catch(e){}
+var nav=(navigator.language||'tr').slice(0,2).toLowerCase();
+applyLang(i18n[saved]?saved:(i18n[nav]?nav:'tr'),false);
+startRotation();
 
-var langOptions = document.querySelectorAll('.lang-option');
-langOptions.forEach(function(opt) {
-    opt.addEventListener('click', function() {
-        var lang = this.getAttribute('data-lang');
-        var t = i18n[lang];
-        if (!t) return;
-        langLabel.textContent = t.label;
-        document.getElementById('el-badge').textContent = t.badge;
-        document.getElementById('el-heroSub').textContent = t.heroSub;
-        document.getElementById('el-heroDesc').textContent = t.heroDesc;
-        document.getElementById('el-btnPlay').textContent = t.btnPlay;
-        document.getElementById('el-btnApple').textContent = t.btnApple;
-        document.getElementById('el-btnSocial').textContent = t.btnSocial;
-        document.getElementById('el-btnContact').textContent = t.btnContact;
-        document.getElementById('elPrivacy').textContent = t.privacy;
-        document.getElementById('elTerms').textContent = t.terms;
-        document.getElementById('el-copyright').textContent = t.copyright;
-        document.documentElement.setAttribute('lang', lang);
-        document.documentElement.setAttribute('dir', t.dir);
-        langOptions.forEach(function(o) { o.classList.toggle('active', o.getAttribute('data-lang') === lang); });
-        langDropdown.classList.remove('open');
-    });
-});
+if(window.matchMedia('(hover:hover)').matches){
+  var stage=document.getElementById('stageContainer');
+  stage.addEventListener('mouseenter',function(){clearInterval(rotateInterval)});
+  stage.addEventListener('mouseleave',startRotation);
+}
+
+var consentSaved=null;try{consentSaved=localStorage.getItem('mfk_consent')}catch(e){}
+if(consentSaved==='yes'){loadGA()}
+else if(consentSaved!=='no'){showConsent()}
+
+fetch('ads.json')
+  .then(function(r){return r.json()})
+  .then(function(d){
+    if(!Array.isArray(d))return;
+    var f=d.filter(function(x){return x.category==='oyun'&&x.pkg&&x.title});
+    if(f.length>=3){
+      loadedGames=f;nextIdx=3;
+      cards.forEach(function(sc,i){fillCard(sc,loadedGames[i])});
+    }
+  })
+  .catch(function(){});
 </script>
-
 </body>
 </html>
