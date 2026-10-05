@@ -110,6 +110,7 @@ body{background-color:var(--bg-dark);color:var(--text-body);font-family:'Inter',
 .hud-tag{font-family:'Press Start 2P',monospace;font-size:5.5px;color:rgba(255,255,255,.4);letter-spacing:.5px}
 .screen-inner{position:relative;flex:1;width:100%;overflow:hidden;display:flex;align-items:center;padding:10px 12px;gap:12px;background:radial-gradient(circle at 50% 50%,#151a28 0%,#0a0d15 100%);box-sizing:border-box;transition:opacity .3s}
 .arcade-screen.swap .screen-inner{opacity:0}
+.arcade-screen.flying{z-index:9}
 .game-icon-box{position:relative;width:58px;height:58px;flex-shrink:0;border-radius:10px;overflow:hidden;background:#080a10;border:1.5px solid var(--c);box-shadow:0 4px 15px rgba(0,0,0,.7);display:flex;align-items:center;justify-content:center;transition:border-color .6s}
 .game-icon-img{width:100%;height:100%;object-fit:cover;border-radius:8px;transition:transform .4s ease}
 .arcade-screen:hover .game-icon-img{transform:scale(1.08)}
@@ -449,6 +450,7 @@ var cardT={
 var loadedGames=fallbackGames.slice();
 var cards=['screenTop','screenCenter','screenBottom'].map(function(id){return document.getElementById(id)});
 var slotNames=['top','center','bottom'];
+var slotOfPos=['center','bottom','top']; // 0=en ön, 1=orta, 2=en arka
 var slotText={top:{tag:'ARCADE',badge:'game'},center:{tag:'FEATURED',badge:'hot'},bottom:{tag:'RETRO',badge:'game'}};
 var nextIdx=3,currentLang='tr',rotateInterval=null;
 var reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -480,7 +482,7 @@ function fillCard(sc,game){
 }
 
 function paintCard(sc){
-  var s=slotNames[sc._slot],st=slotText[s];
+  var s=slotOfPos[sc._pos],st=slotText[s];
   slotNames.forEach(function(n){sc.classList.remove('slot-'+n)});
   sc.classList.add('slot-'+s);
   sc.querySelector('.hud-tag').textContent=st.tag;
@@ -492,15 +494,23 @@ function paintCard(sc){
 function rotateShowcase(){
   if(document.hidden)return;
   cards.forEach(function(sc){
-    var wraps=sc._slot===2;
-    sc._slot=(sc._slot+1)%3;
+    var wraps=sc._pos===0;            // en öndeki kart
+    sc._pos=(sc._pos+2)%3;            // ön→arka, orta→ön, arka→orta
     paintCard(sc);
     if(wraps){
       var g=loadedGames[nextIdx++%loadedGames.length];
       var nx=loadedGames[nextIdx%loadedGames.length];
       if(nx&&nx.icon){new Image().src=nx.icon}
-      sc.classList.add('swap');
+      sc.classList.add('swap','flying');
+      if(sc.animate&&!reduceMotion){
+        sc.animate([
+          {translate:'0 0',rotate:'0deg',scale:'1',offset:0},
+          {translate:'150px 20px',rotate:'7deg',scale:'.93',offset:.5},
+          {translate:'0 0',rotate:'0deg',scale:'1',offset:1}
+        ],{duration:650,easing:'ease-in-out'});
+      }
       setTimeout(function(){fillCard(sc,g);sc.classList.remove('swap')},300);
+      setTimeout(function(){sc.classList.remove('flying')},650);
     }
   });
 }
@@ -629,9 +639,10 @@ document.getElementById('consentNo').addEventListener('click',function(){setCons
 window.addEventListener('resize',function(){if(!consentBox.hidden)showConsent()});
 
 // ── BAŞLANGIÇ: yedek listeyle hemen doldur, sonra ads.json ──
+var initPos=[2,0,1];
 cards.forEach(function(sc,i){
-  sc._slot=i;
-  fillCard(sc,loadedGames[i]);
+  sc._pos=initPos[i];
+  fillCard(sc,loadedGames[sc._pos]);
   sc.addEventListener('click',startRotation);
 });
 
@@ -652,7 +663,7 @@ fetch('ads.json')
     var f=d.filter(function(x){return x.category==='oyun'&&x.pkg&&x.title});
     if(f.length>=3){
       loadedGames=f;nextIdx=3;
-      cards.forEach(function(sc,i){fillCard(sc,loadedGames[i])});
+      cards.forEach(function(sc){fillCard(sc,loadedGames[sc._pos])});
     }
   })
   .catch(function(){});
