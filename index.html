@@ -163,8 +163,8 @@ footer a:hover{color:#fff}
   .social-link{font-size:13.5px;padding:10px 15px}
   footer{font-size:13px}
   .consent p{font-size:14px}
-  .showcase-stage{height:560px}
-  .card-stage-container{transform:scale(1.2)}
+  .showcase-stage{height:480px}
+  .card-stage-container{transform:scale(1)}
   .slot-top{width:270px;height:140px}
   .slot-bottom{width:280px;height:145px;left:50px}
   .slot-center{width:310px;height:155px;top:120px;left:55px}
@@ -177,8 +177,8 @@ footer a:hover{color:#fff}
   .game-icon-box{width:64px;height:64px}
   .slot-center .game-icon-box{width:76px;height:76px}
 }
-@media (min-width:1400px){.showcase-stage{height:660px}.card-stage-container{transform:scale(1.45)}}
-@media (min-width:1700px){.showcase-stage{height:740px}.card-stage-container{transform:scale(1.65)}}
+@media (min-width:1400px){.showcase-stage{height:520px}.card-stage-container{transform:scale(1.1)}}
+@media (min-width:1700px){.showcase-stage{height:560px}.card-stage-container{transform:scale(1.2)}}
 
 /* MOBİL */
 @media (max-width:900px){
@@ -507,7 +507,7 @@ function rotateShowcase(){
 
 function startRotation(){
   clearInterval(rotateInterval);
-  if(!reduceMotion)rotateInterval=setInterval(rotateShowcase,3800);
+  rotateInterval=setInterval(rotateShowcase,3800);
 }
 
 // ── MENÜLER ──
@@ -640,11 +640,6 @@ var nav=(navigator.language||'tr').slice(0,2).toLowerCase();
 applyLang(i18n[saved]?saved:(i18n[nav]?nav:'tr'),false);
 startRotation();
 
-if(window.matchMedia('(hover:hover)').matches){
-  var stage=document.getElementById('stageContainer');
-  stage.addEventListener('mouseenter',function(){clearInterval(rotateInterval)});
-  stage.addEventListener('mouseleave',startRotation);
-}
 
 var consentSaved=null;try{consentSaved=localStorage.getItem('mfk_consent')}catch(e){}
 if(consentSaved==='yes'){loadGA()}
