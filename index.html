@@ -156,9 +156,9 @@ html.intro .hero-title .ch{opacity:0}
 .hero-title.reveal .ch{animation:chIn .55s steps(5) both;animation-delay:calc(var(--i)*80ms)}
 @keyframes chIn{0%{opacity:0;transform:translateY(-16px) scale(1.35);filter:blur(5px)}35%{opacity:1}100%{opacity:1;transform:none;filter:none}}
 .hero-title::before,.hero-title::after{content:attr(data-text);position:absolute;left:0;top:0;width:100%;opacity:0;pointer-events:none;text-shadow:none;mix-blend-mode:screen}
-.hero-title.glitching{animation:gShake .24s steps(2) 1}
-.hero-title.glitching::before{color:#00d2ff;opacity:.9;animation:gA .24s steps(2) 1}
-.hero-title.glitching::after{color:#ff2a85;opacity:.9;animation:gB .24s steps(2) 1}
+.hero-title.glitching{animation:gShake .42s steps(3) 1}
+.hero-title.glitching::before{color:#00d2ff;opacity:.9;animation:gA .42s steps(3) 1}
+.hero-title.glitching::after{color:#ff2a85;opacity:.9;animation:gB .42s steps(3) 1}
 @keyframes gShake{0%{transform:translate(0)}25%{transform:translate(-4px,1px)}50%{transform:translate(4px,-1px)}75%{transform:translate(-2px,0)}100%{transform:none}}
 @keyframes gA{0%{clip-path:inset(8% 0 62% 0);transform:translate(-6px,0)}50%{clip-path:inset(58% 0 12% 0);transform:translate(6px,0)}100%{clip-path:inset(30% 0 40% 0);transform:translate(-3px,0)}}
 @keyframes gB{0%{clip-path:inset(60% 0 10% 0);transform:translate(6px,0)}50%{clip-path:inset(12% 0 58% 0);transform:translate(-6px,0)}100%{clip-path:inset(40% 0 30% 0);transform:translate(3px,0)}}
@@ -256,6 +256,23 @@ html[lang="ar"] .btn-modern,html[lang="ar"] .pixel-badge,html[lang="ar"] .lang-t
 @media (max-width:900px){.synth{height:48vh;opacity:.45}.synth-sun{width:44vw;bottom:20vh}.synth-floor{height:20vh}.synth-grid{background-size:48px 48px}}
 @media (prefers-reduced-motion:reduce){.synth-grid{animation:none}}
 
+/* CANLI SAHNE: dağlar, yıldızlar, kayan yıldız */
+.synth-sun{animation:sunPulse 5s ease-in-out infinite alternate}
+@keyframes sunPulse{to{box-shadow:0 0 140px rgba(255,42,133,.75);filter:brightness(1.12)}}
+.synth-mtn{position:absolute;left:0;right:0;bottom:28vh;width:100%;height:11vh;display:block}
+.synth-mtn path{vector-effect:non-scaling-stroke}
+.m-back{fill:#0c0720;stroke:rgba(181,55,242,.75);stroke-width:1.5}
+.m-front{fill:#09061a;stroke:#00d2ff;stroke-width:1.5;filter:drop-shadow(0 0 4px rgba(0,210,255,.7))}
+.m-facet{fill:none;stroke:rgba(0,210,255,.35);stroke-width:1}
+.synth-sky{position:fixed;left:0;right:0;top:0;height:66vh;z-index:0;pointer-events:none;overflow:hidden}
+.synth-sky i{position:absolute;width:var(--s,2px);height:var(--s,2px);opacity:.15;box-shadow:0 0 6px currentColor;animation:twinkle var(--d,3s) ease-in-out var(--dl,0s) infinite}
+@keyframes twinkle{50%{opacity:.95}}
+.shoot{position:absolute;display:block;width:110px;height:2px;background:linear-gradient(90deg,transparent,#fff);opacity:0;transform-origin:left center;transform:rotate(25deg)}
+.shoot.go{animation:shoot .9s ease-out forwards}
+@keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(25deg)}12%{opacity:1}100%{opacity:0;transform:translate(340px,160px) rotate(25deg)}}
+@media (max-width:900px){.synth-mtn{bottom:20vh;height:11vh}}
+@media (prefers-reduced-motion:reduce){.synth-sun{animation:none}.synth-sky i{animation:none;opacity:.5}}
+
 /* KART PARLAMASI + 3D EĞİLME */
 .arcade-screen::before{content:'';position:absolute;inset:0;z-index:9;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at var(--lx,50%) var(--ly,50%),rgba(255,255,255,.16),transparent 55%);opacity:0;transition:opacity .35s}
 .card-stage-container.tilting .arcade-screen::before{opacity:1}
@@ -284,7 +301,14 @@ html[lang="ar"] .btn-modern,html[lang="ar"] .pixel-badge,html[lang="ar"] .lang-t
 </div>
 
 <div class="cyber-bg"></div>
-<div class="synth" aria-hidden="true"><div class="synth-sun"></div><div class="synth-floor"><div class="synth-grid"></div></div></div>
+<div class="synth" aria-hidden="true"><div class="synth-sun"></div>
+<svg class="synth-mtn" viewBox="0 0 1200 200" preserveAspectRatio="none">
+<path class="m-back" d="M0 200V150L120 95 220 140 330 85 450 135 560 170 640 175 740 120 850 80 960 130 1080 90 1200 140V200Z"/>
+<path class="m-front" d="M0 200V120L90 70 170 110 260 40 350 105 430 80 520 150 600 165 680 150 770 85 860 110 950 30 1040 100 1120 60 1200 115V200Z"/>
+<path class="m-facet" d="M260 40L300 200M260 40L215 200M90 70L60 200M430 80L470 200M950 30L990 200M950 30L905 200M770 85L735 200M1120 60L1090 200M1120 60L1160 200"/>
+</svg>
+<div class="synth-floor"><div class="synth-grid"></div></div></div>
+<div class="synth-sky" id="synthSky" aria-hidden="true"></div>
 <canvas id="particleCanvas"></canvas>
 
 <div class="lang-bar">
@@ -465,10 +489,10 @@ html[lang="ar"] .btn-modern,html[lang="ar"] .pixel-badge,html[lang="ar"] .lang-t
       setTimeout(function(){
         if(!document.hidden&&!html.classList.contains('intro')){
           title.classList.add('glitching');
-          setTimeout(function(){title.classList.remove('glitching')},260);
+          setTimeout(function(){title.classList.remove('glitching')},450);
         }
         loop();
-      },3500+Math.random()*3500);
+      },2500+Math.random()*2500);
     })();
   }
 
@@ -492,6 +516,30 @@ html[lang="ar"] .btn-modern,html[lang="ar"] .pixel-badge,html[lang="ar"] .lang-t
     intro.addEventListener('touchstart',finish);
     document.addEventListener('keydown',finish);
   }
+})();
+
+// ── CANLI SAHNE: yıldızlar + kayan yıldız ──
+(function(){
+  var sky=document.getElementById('synthSky');if(!sky)return;
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var n=innerWidth<600?34:64,cols=['#fff','#fff','#fff','#00d2ff','#ff2a85','#f5c518'];
+  for(var i=0;i<n;i++){
+    var s=document.createElement('i'),z=Math.random()<.2?3:2;
+    s.style.cssText='left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.pow(Math.random(),1.5)*100).toFixed(1)+'%;--s:'+z+'px;--d:'+(2+Math.random()*3).toFixed(1)+'s;--dl:-'+(Math.random()*5).toFixed(1)+'s;color:'+cols[i%cols.length]+';background:currentColor';
+    sky.appendChild(s);
+  }
+  if(calm)return;
+  var st=document.createElement('b');st.className='shoot';sky.appendChild(st);
+  st.addEventListener('animationend',function(){st.classList.remove('go')});
+  (function loop(){
+    setTimeout(function(){
+      if(!document.hidden&&!document.documentElement.classList.contains('intro')){
+        st.style.left=(5+Math.random()*60)+'%';st.style.top=(3+Math.random()*28)+'%';
+        void st.offsetWidth;st.classList.add('go');
+      }
+      loop();
+    },6000+Math.random()*6000);
+  })();
 })();
 
 // ── 3D EĞİLME + PİKSEL İZ (yalnızca fareli cihazlar) ──
