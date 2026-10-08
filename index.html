@@ -171,6 +171,29 @@ html.intro.calm #intro.out{animation:inFade .45s ease forwards}
 html.calm .hero-title.reveal .ch{animation:chFade .5s ease both;animation-delay:calc(var(--i)*40ms)}
 @keyframes chFade{from{opacity:0}to{opacity:1}}
 
+/* KADEMELİ GİRİŞ + KART DERİNLİĞİ + BUTON HİSSİ */
+html.intro .hero-left>*:not(.hero-title),html.intro .arcade-screen{opacity:0}
+html.enter .hero-left>*:not(.hero-title){animation:rise .6s cubic-bezier(.2,.8,.2,1) backwards}
+html.enter .hero-left>.pixel-badge{animation-delay:0s}
+html.enter .hero-left>.hero-sub{animation-delay:.5s}
+html.enter .hero-left>.hero-desc{animation-delay:.65s}
+html.enter .hero-left>.hero-buttons{animation-delay:.8s}
+html.enter .arcade-screen{animation:deal .7s cubic-bezier(.2,.8,.2,1) backwards}
+html.enter #screenTop{animation-delay:.7s}
+html.enter #screenBottom{animation-delay:.85s}
+html.enter #screenCenter{animation-delay:1s}
+@keyframes rise{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+@keyframes deal{from{opacity:0;translate:var(--tx,140px) var(--ty,-30px)}to{opacity:1;translate:0 0}}
+html.calm{--tx:0px;--ty:14px}
+.slot-top{filter:brightness(.7) blur(.7px)}
+.slot-bottom{filter:brightness(.85)}
+.btn-play:active{transform:translateY(3px);box-shadow:0 1px 0 #006b85,0 2px 8px rgba(0,210,255,.3)}
+.btn-apple:active{transform:translateY(3px);box-shadow:0 1px 0 #0e7840,0 2px 8px rgba(37,244,136,.3)}
+.btn-links:active{transform:translateY(3px);box-shadow:0 1px 0 #202738,0 2px 8px rgba(0,0,0,.5)}
+.btn-contact:active{transform:translateY(3px);box-shadow:0 1px 0 #7a6108,0 2px 8px rgba(245,197,24,.3)}
+.ring{position:fixed;width:16px;height:16px;margin:-8px 0 0 -8px;border:2px solid currentColor;pointer-events:none;z-index:9500;animation:ringOut .55s ease-out forwards}
+@keyframes ringOut{from{opacity:.9}to{opacity:0;transform:scale(5)}}
+
 /* ÇEREZ ONAY BANDI */
 .consent{position:fixed;left:0;right:0;bottom:0;z-index:2000;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(10,14,24,.96);backdrop-filter:blur(12px);border-top:1.5px solid rgba(0,210,255,.35);box-shadow:0 -8px 30px rgba(0,0,0,.6);text-align:start}
 .consent[hidden]{display:none}
@@ -515,7 +538,7 @@ html.ios .btn-apple{order:-1}
     if(done)return;done=true;
     try{localStorage.setItem('mfk_intro',String(Date.now()))}catch(e){}
     intro.classList.add('out');
-    setTimeout(function(){title.classList.add('reveal')},250);
+    setTimeout(function(){title.classList.add('reveal');html.classList.add('enter')},250);
     setTimeout(function(){html.classList.remove('intro')},650);
   }
   if(html.classList.contains('intro')){
@@ -529,6 +552,18 @@ html.ios .btn-apple{order:-1}
     intro.addEventListener('click',finish);
     document.addEventListener('keydown',finish);
   }
+})();
+
+// ── BUTON: dokunsal his (basınca çöker + kare dalga) ──
+(function(){
+  document.addEventListener('touchstart',function(){},{passive:true});
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  document.addEventListener('pointerdown',function(e){
+    var b=e.target.closest&&e.target.closest('.btn-modern');if(!b)return;
+    var r=document.createElement('i');r.className='ring';
+    r.style.cssText='left:'+e.clientX+'px;top:'+e.clientY+'px;color:'+getComputedStyle(b).color;
+    document.body.appendChild(r);setTimeout(function(){r.remove()},600);
+  },{passive:true});
 })();
 
 // ── CANLI SAHNE: yıldızlar + kayan yıldız ──
