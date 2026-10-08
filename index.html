@@ -33,7 +33,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<script>try{var q=location.search.indexOf('intro')>-1;if(q||(!sessionStorage.getItem('mfk_intro')&&!matchMedia('(prefers-reduced-motion: reduce)').matches))document.documentElement.classList.add('intro')}catch(e){}</script>
+<script>(function(){var h=document.documentElement;try{var last=0;try{last=+localStorage.getItem('mfk_intro')||0}catch(e){}if(location.search.indexOf('intro')>-1||Date.now()-last>1200000)h.classList.add('intro');if(matchMedia('(prefers-reduced-motion: reduce)').matches)h.classList.add('calm')}catch(e){h.classList.add('intro')}})()</script>
 <style>
 :root{--bg-dark:#07090e;--btn-bg:rgba(18,23,34,.9);--cyan:#00d2ff;--green:#25f488;--pink:#ff2a85;--purple:#b537f2;--yellow:#f5c518;--text-sub:#94a3b8;--text-body:#cbd5e1}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -163,6 +163,14 @@ html.intro .hero-title .ch{opacity:0}
 @keyframes gA{0%{clip-path:inset(8% 0 62% 0);transform:translate(-6px,0)}50%{clip-path:inset(58% 0 12% 0);transform:translate(6px,0)}100%{clip-path:inset(30% 0 40% 0);transform:translate(-3px,0)}}
 @keyframes gB{0%{clip-path:inset(60% 0 10% 0);transform:translate(6px,0)}50%{clip-path:inset(12% 0 58% 0);transform:translate(-6px,0)}100%{clip-path:inset(40% 0 30% 0);transform:translate(3px,0)}}
 
+/* SAKİN AÇILIŞ (hareketi azalt açık olanlar için: yanıp sönme ve çökme yok, yumuşak geçiş var) */
+html.calm .in-logo{animation:none}
+html.calm .in-press.blink{animation:none}
+html.intro.calm #intro.out{animation:inFade .45s ease forwards}
+@keyframes inFade{to{opacity:0}}
+html.calm .hero-title.reveal .ch{animation:chFade .5s ease both;animation-delay:calc(var(--i)*40ms)}
+@keyframes chFade{from{opacity:0}to{opacity:1}}
+
 /* ÇEREZ ONAY BANDI */
 .consent{position:fixed;left:0;right:0;bottom:0;z-index:2000;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;padding:12px 20px calc(12px + env(safe-area-inset-bottom,0px));background:rgba(10,14,24,.96);backdrop-filter:blur(12px);border-top:1.5px solid rgba(0,210,255,.35);box-shadow:0 -8px 30px rgba(0,0,0,.6);text-align:start}
 .consent[hidden]{display:none}
@@ -272,6 +280,12 @@ html[lang="ar"] .btn-modern,html[lang="ar"] .pixel-badge,html[lang="ar"] .lang-t
 @keyframes shoot{0%{opacity:0;transform:translate(0,0) rotate(25deg)}12%{opacity:1}100%{opacity:0;transform:translate(340px,160px) rotate(25deg)}}
 @media (max-width:900px){.synth-mtn{bottom:20vh;height:11vh}}
 @media (prefers-reduced-motion:reduce){.synth-sun{animation:none}.synth-sky i{animation:none;opacity:.5}}
+
+/* MAĞAZA ÖNCELİĞİ */
+html.ios .btn-apple{order:-1}
+.btn-modern.is-primary{animation:storePulse 2s ease-in-out infinite}
+@keyframes storePulse{50%{filter:brightness(1.3)}}
+@media (prefers-reduced-motion:reduce){.btn-modern.is-primary{animation:none}}
 
 /* KART PARLAMASI + 3D EĞİLME */
 .arcade-screen::before{content:'';position:absolute;inset:0;z-index:9;pointer-events:none;border-radius:inherit;background:radial-gradient(circle at var(--lx,50%) var(--ly,50%),rgba(255,255,255,.16),transparent 55%);opacity:0;transition:opacity .35s}
@@ -499,7 +513,7 @@ html[lang="ar"] .btn-modern,html[lang="ar"] .pixel-badge,html[lang="ar"] .lang-t
   var intro=document.getElementById('intro'),done=false;
   function finish(){
     if(done)return;done=true;
-    try{sessionStorage.setItem('mfk_intro','1')}catch(e){}
+    try{localStorage.setItem('mfk_intro',String(Date.now()))}catch(e){}
     intro.classList.add('out');
     setTimeout(function(){title.classList.add('reveal')},250);
     setTimeout(function(){html.classList.remove('intro')},650);
@@ -513,7 +527,6 @@ html[lang="ar"] .btn-modern,html[lang="ar"] .pixel-badge,html[lang="ar"] .lang-t
       fill.style.width=p+'%';pct.textContent=p+'%';
     },110);
     intro.addEventListener('click',finish);
-    intro.addEventListener('touchstart',finish);
     document.addEventListener('keydown',finish);
   }
 })();
@@ -680,6 +693,11 @@ function fixPkg(p){
   var m=/^com\.mfk\.(.+)$/.exec(p||'');
   return (m&&PKG_CASE[m[1].toLowerCase()])?'com.mfk.'+PKG_CASE[m[1].toLowerCase()]:(p||'');
 }
+// ── MAĞAZA: cihaza göre ──
+var APPLE_URL='https://apps.apple.com'; // TEK YER: Apple geliştirici linkini buraya yazın
+var UA=navigator.userAgent||'';
+var isIOS=/iPad|iPhone|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var isAndroid=/Android/i.test(UA);
 var PALETTE=[
   {c:'#25f488',g:'rgba(37,244,136,.5)'},  // yeşil
   {c:'#00d2ff',g:'rgba(0,210,255,.4)'},   // mavi
@@ -691,7 +709,7 @@ function fillCard(sc,game,gi){
   var pc=PALETTE[(gi||0)%PALETTE.length];
   sc.style.setProperty('--c',pc.c);sc.style.setProperty('--glow',pc.g);
   var img=sc.querySelector('.game-icon-img'),title=sc.querySelector('.arcade-title');
-  sc.href=game.url||game.link||game.playUrl||game.storeUrl||(game.pkg?'https://play.google.com/store/apps/details?id='+fixPkg(game.pkg):'https://play.google.com/store/apps/developer?id=mFk+Games');
+  sc.href=isIOS?(game.ios||game.appStore||APPLE_URL):(game.url||game.link||game.playUrl||game.storeUrl||(game.pkg?'https://play.google.com/store/apps/details?id='+fixPkg(game.pkg):'https://play.google.com/store/apps/developer?id=mFk+Games'));
   title.textContent=game.title.toUpperCase();
   title.setAttribute('title',game.title);
   var list=[],p=fixPkg(game.pkg),i=0;
@@ -715,7 +733,7 @@ function paintCard(sc){
   sc.classList.add('slot-'+s);
   sc.querySelector('.hud-tag').textContent=st.tag;
   sc.querySelector('.game-meta-badge').textContent=cardT[st.badge][currentLang]||cardT[st.badge].en;
-  var play=s==='center'?'Google Play':(cardT.play[currentLang]||cardT.play.en);
+  var play=s==='center'?(isIOS?'App Store':'Google Play'):(cardT.play[currentLang]||cardT.play.en);
   sc.querySelector('.game-play-badge').firstChild.nodeValue=play+' ';
 }
 
@@ -873,6 +891,13 @@ cards.forEach(function(sc,i){
   fillCard(sc,loadedGames[sc._pos],sc._pos);
   sc.addEventListener('click',startRotation);
 });
+
+var appleBtn=document.querySelector('.btn-apple');
+appleBtn.setAttribute('href',APPLE_URL);
+if(isIOS||isAndroid){
+  document.documentElement.classList.add(isIOS?'ios':'android');
+  (isIOS?appleBtn:document.querySelector('.btn-play')).classList.add('is-primary');
+}
 
 var saved=null;try{saved=localStorage.getItem('mfk_lang')}catch(e){}
 var nav=(navigator.language||'tr').slice(0,2).toLowerCase();
