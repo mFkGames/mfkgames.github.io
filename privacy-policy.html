@@ -1,132 +1,322 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - mFk Games</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Gizlilik Politikası | Privacy Policy — mFk Games</title>
+    <meta name="description" content="mFk Games resmi Gizlilik Politikası (Privacy Policy). Mobil oyunlarımız ve web sitemiz için veri güvenliği ve gizlilik taahhüdümüz.">
     <link rel="icon" type="image/png" sizes="32x32" href="https://mfkgames.github.io/favicon.png">
     <link rel="apple-touch-icon" sizes="180x180" href="https://mfkgames.github.io/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-dark: #07090e;
+            --card-bg: #0d121f;
+            --border-color: rgba(255, 255, 255, 0.12);
+            --cyan: #00d2ff;
+            --green: #25f488;
+            --pink: #ff2a85;
+            --text-title: #ffffff;
+            --text-body: #cbd5e1;
+            --text-sub: #94a3b8;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f6f8;
+            background-color: var(--bg-dark);
+            color: var(--text-body);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.7;
+            padding: 30px 20px 60px;
+            min-height: 100vh;
         }
         .container {
-            background: #ffffff;
+            max-width: 860px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border: 1.5px solid var(--border-color);
+            border-radius: 14px;
             padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            margin-top: 20px;
-            margin-bottom: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+        }
+        .header-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
         }
         .back-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            color: #3498db;
+            color: var(--cyan);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: color 0.2s;
         }
         .back-link:hover {
+            color: #fff;
             text-decoration: underline;
         }
+        .lang-switch {
+            display: inline-flex;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 4px;
+            gap: 4px;
+        }
+        .lang-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .lang-btn.active {
+            background: var(--cyan);
+            color: #07090e;
+        }
+        .banner-wrap {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .banner-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 25px rgba(0, 210, 255, 0.15);
+        }
         h1 {
-            color: #1a1a1a;
-            border-bottom: 2px solid #eaeaea;
-            padding-bottom: 12px;
+            color: var(--text-title);
             font-size: 28px;
-            margin-top: 0;
+            font-weight: 700;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+        .last-update {
+            font-size: 13px;
+            color: var(--text-sub);
+            margin-bottom: 30px;
+            font-style: italic;
         }
         h2 {
-            color: #2c3e50;
-            font-size: 20px;
-            margin-top: 30px;
-            border-left: 4px solid #3498db;
-            padding-left: 10px;
+            color: var(--cyan);
+            font-size: 19px;
+            font-weight: 600;
+            margin-top: 35px;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        p, li {
+        p {
+            margin-bottom: 16px;
             font-size: 15px;
-            color: #555;
+            color: var(--text-body);
         }
         ul {
-            padding-left: 20px;
+            margin-bottom: 20px;
+            padding-left: 24px;
         }
         li {
             margin-bottom: 8px;
+            font-size: 14.5px;
         }
         a {
-            color: #3498db;
+            color: var(--cyan);
             text-decoration: none;
         }
         a:hover {
             text-decoration: underline;
         }
-        .date {
-            font-style: italic;
-            color: #888;
-            margin-bottom: 30px;
+        .highlight-box {
+            background: rgba(0, 210, 255, 0.05);
+            border-left: 4px solid var(--cyan);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+        .highlight-box.apple {
+            border-left-color: var(--green);
+            background: rgba(37, 244, 136, 0.05);
         }
         footer {
             margin-top: 50px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border-color);
             text-align: center;
             font-size: 13px;
-            color: #999;
-            border-top: 1px solid #eaeaea;
-            padding-top: 20px;
+            color: var(--text-sub);
+        }
+        .lang-section {
+            display: none;
+        }
+        .lang-section.active {
+            display: block;
+        }
+        @media (max-width: 600px) {
+            .container {
+                padding: 24px 18px;
+            }
+            h1 {
+                font-size: 22px;
+            }
+            h2 {
+                font-size: 17px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <a href="https://mfkgames.github.io/" class="back-link">&larr; Back to mFk Games</a>
+
+<div class="container">
+    <div class="header-nav">
+        <a href="https://mfkgames.github.io/" class="back-link">
+            <span>&#8592;</span> <span id="backText">Ana Sayfaya Dön</span>
+        </a>
+        <div class="lang-switch">
+            <button class="lang-btn active" id="btnTR" onclick="setLang('tr')">Türkçe</button>
+            <button class="lang-btn" id="btnEN" onclick="setLang('en')">English</button>
+        </div>
+    </div>
+
+    <div class="banner-wrap">
+        <img src="og-image.png" alt="mFk Games" class="banner-img">
+    </div>
+
+    <!-- TÜRKÇE BÖLÜM -->
+    <div id="section-tr" class="lang-section active">
+        <h1>Gizlilik Politikası</h1>
+        <p class="last-update">Son Güncelleme: 27 Ekim 2026</p>
+
+        <p><strong>mFk Games</strong> olarak (<a href="https://mfkgames.github.io/">https://mfkgames.github.io/</a>), oyuncularımızın ve ziyaretçilerimizin gizliliğine ve kişisel verilerinin korunmasına en üst düzeyde önem veriyoruz. Bu Gizlilik Politikası, web sitemizi ziyaret ettiğinizde veya Google Play Store ile Apple App Store üzerinde yayınlanan mobil oyunlarımızı ve uygulamalarımızı kullandığınızda hangi verilerin toplandığını, nasıl kullanıldığını ve korunduğunu açıklar.</p>
+
+        <h2>1. Bilgi Toplama ve Kullanım Amacı</h2>
+        <p>Doğrudan web sitemiz üzerinden e-posta ile iletişime geçmediğiniz sürece isim, adres veya telefon numarası gibi kimliğinizi doğrudan belirten kişisel veriler toplamıyoruz. Mobil oyunlarımız ve uygulamalarımız ise oyun içi istikrarı sağlamak, hataları gidermek, kullanıcı deneyimini iyileştirmek ve reklam gösterimi sağlamak amacıyla güvenilir üçüncü taraf kütüphaneler (SDK) kullanmaktadır.</p>
+
+        <h2>2. Üçüncü Taraf Servis Sağlayıcıları</h2>
+        <p>Uygulamalarımızda kullanılan üçüncü taraf sağlayıcılar, kendi gizlilik politikaları çerçevesinde cihaz modeli, işletim sistemi sürümü ve anonim kullanım istatistikleri gibi teknik verilere erişebilir. Kullanılan başlıca servisler ve gizlilik ilkeleri şunlardır:</p>
+        <ul>
+            <li><strong>Apple App Store &amp; Apple Servisleri:</strong> <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple Gizlilik Politikası</a></li>
+            <li><strong>Google Play Hizmetleri:</strong> <a href="https://www.google.com/policies/privacy/" target="_blank" rel="noopener noreferrer">Google Gizlilik Politikası</a></li>
+            <li><strong>Google AdMob (Reklam Çözümleri):</strong> <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">AdMob Gizlilik ve Güvenlik</a></li>
+            <li><strong>Google Analytics &amp; Firebase Crashlytics:</strong> <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">Firebase Gizlilik Sözleşmesi</a></li>
+        </ul>
+
+        <div class="highlight-box apple">
+            <h2>3. Apple iOS Standartları &amp; Uygulama Takip Şeffaflığı (ATT)</h2>
+            <p>iOS işletim sistemli cihazlarda (iPhone, iPad) çalışan uygulamalarımız, Apple'ın <strong>App Tracking Transparency (ATT)</strong> çerçevesine eksiksiz uyumludur. Reklam amacıyla cihaz tanıtıcısı (IDFA) kullanılmadan önce kullanıcıdan açık onay istenir. Bu izni dilediğiniz an cihazınızın <em>Ayarlar &gt; Gizlilik ve Güvenlik &gt; Takip</em> menüsünden değiştirebilir veya geri çekebilirsiniz.</p>
+        </div>
+
+        <h2>4. Hata Günlükleri ve Teşhis Verileri (Log Data)</h2>
+        <p>Oyunlarımızda olası bir donma veya çökme yaşanması durumunda, sorunu hızlıca tespit edip çözebilmemiz için Firebase Crashlytics gibi araçlar aracılığıyla teknik hata kayıtları otomatik olarak toplanır. Bu veriler yalnızca teknik kararlılığı artırmak amacıyla analiz edilir.</p>
+
+        <h2>5. Çocukların Gizliliği (COPPA ve Aile Uyumluluğu)</h2>
+        <p>Çocukların çevrim içi güvenliği en temel önceliğimizdir. 13 yaşın altındaki çocuklardan bilerek ve isteyerek hiçbir kişisel tanımlayıcı bilgi toplamıyoruz. Ailelere veya çocuklara yönelik projelerimizde <strong>COPPA (Children's Online Privacy Protection Act)</strong> kurallarına harfiyen uyulmakta ve kişiselleştirilmiş veri takibi yapılmamaktadır.</p>
+
+        <h2>6. Veri Güvenliği ve Saklama</h2>
+        <p>Kullanıcılarımızın bize duyduğu güvene değer veriyor, toplanan teknik verilerin güvenliğini sağlamak için endüstri standardı ticari ve teknik güvenlik önlemleri uyguluyoruz. Veriler yalnızca hizmetin gerektirdiği süre boyunca saklanır.</p>
+
+        <h2>7. Kullanıcı Hakları ve Veri Silme</h2>
+        <p>Kullanıcılar, verilerinin işlenmesiyle ilgili bilgi talep etme veya verilerinin silinmesini isteme hakkına sahiptir. Destek adresimize başvurarak bu haklarınızı dilediğiniz an kullanabilirsiniz.</p>
+
+        <h2>8. İletişim ve Destek</h2>
+        <p>Gizlilik Politikamız veya veri uygulamalarımız hakkında sorularınız, geri bildirimleriniz veya veri silme talepleriniz için bize resmi iletişim adreslerimizden ulaşabilirsiniz:</p>
+        <ul>
+            <li><strong>Resmi E-Posta:</strong> <a href="mailto:mfkgames.support@gmail.com">mfkgames.support@gmail.com</a></li>
+            <li><strong>Web Sitesi:</strong> <a href="https://mfkgames.github.io/" target="_blank">https://mfkgames.github.io/</a></li>
+        </ul>
+    </div>
+
+    <!-- ENGLISH SECTION -->
+    <div id="section-en" class="lang-section">
         <h1>Privacy Policy</h1>
-        <p class="date">Last updated: October 27, 2026</p>
+        <p class="last-update">Last Updated: October 27, 2026</p>
 
-        <p>At <strong>mFk Games</strong> (accessible from <a href="https://mfkgames.github.io/" target="_blank">https://mfkgames.github.io/</a>), one of our main priorities is the privacy of our visitors and players. This Privacy Policy document outlines the types of information that is collected and recorded by mFk Games and how we use it across our website, games, and mobile applications.</p>
-        <p>If you have additional questions or require more information about our Privacy Policy, do not hesitate to contact us at <a href="mailto:mfkgames.support@gmail.com">mfkgames.support@gmail.com</a>.</p>
+        <p>At <strong>mFk Games</strong> (<a href="https://mfkgames.github.io/">https://mfkgames.github.io/</a>), the privacy and protection of our players and visitors is of paramount importance. This Privacy Policy explains what information is collected, how it is used, and how it is secured when you visit our website or play our mobile games and applications distributed through Google Play and the Apple App Store.</p>
 
-        <h2>1. Information Collection and Use</h2>
-        <p>We do not collect any personally identifiable information (such as your full name, physical address, or phone number) directly on our website unless you choose to contact us. However, our mobile applications and games distributed through official stores (Google Play Store and Apple App Store) may utilize external services and SDKs that collect information used to provide core features, gameplay analytics, and advertisements.</p>
+        <h2>1. Information Collection and Purpose</h2>
+        <p>We do not collect personally identifiable information (such as your full name, physical address, or phone number) directly on our website unless you choose to contact us via email. Our mobile applications integrate industry-standard software development kits (SDKs) to ensure gameplay stability, diagnose crashes, improve user experience, and provide advertising.</p>
 
         <h2>2. Third-Party Service Providers</h2>
-        <p>Our mobile games and apps integrate trusted third-party libraries and SDKs to support game functionality, secure payments, crash diagnostics, and advertising. These third parties access non-personal data (such as device model, OS version, advertising identifiers, and anonymous usage statistics) in accordance with their respective privacy policies:</p>
+        <p>Third-party service providers integrated into our mobile games may access non-personal technical data (such as device model, OS version, and anonymous gameplay analytics) in accordance with their respective privacy policies:</p>
         <ul>
-            <li><a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple App Store &amp; Apple Privacy</a></li>
-            <li><a href="https://www.google.com/policies/privacy/" target="_blank" rel="noopener noreferrer">Google Play Services</a></li>
-            <li><a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">Google AdMob</a></li>
-            <li><a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">Google Analytics for Firebase &amp; Crashlytics</a></li>
+            <li><strong>Apple App Store &amp; Services:</strong> <a href="https://www.apple.com/legal/privacy/" target="_blank" rel="noopener noreferrer">Apple Privacy Policy</a></li>
+            <li><strong>Google Play Services:</strong> <a href="https://www.google.com/policies/privacy/" target="_blank" rel="noopener noreferrer">Google Privacy Policy</a></li>
+            <li><strong>Google AdMob:</strong> <a href="https://support.google.com/admob/answer/6128543" target="_blank" rel="noopener noreferrer">AdMob Privacy &amp; Data Security</a></li>
+            <li><strong>Firebase Analytics &amp; Crashlytics:</strong> <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener noreferrer">Firebase Privacy Terms</a></li>
         </ul>
 
-        <h2>3. Apple iOS Guidelines &amp; App Tracking Transparency (ATT)</h2>
-        <p>For users on iOS devices, our applications comply strictly with Apple's App Tracking Transparency (ATT) framework. If an application utilizes advertising or tracking technologies, it requests your explicit permission before collecting device identifiers (IDFA). You may adjust or revoke tracking preferences at any time through your iOS device settings (<em>Settings &gt; Privacy &amp; Security &gt; Tracking</em>).</p>
+        <div class="highlight-box apple">
+            <h2>3. Apple iOS Standards &amp; App Tracking Transparency (ATT)</h2>
+            <p>Our applications running on iOS devices (iPhone, iPad) fully comply with Apple's <strong>App Tracking Transparency (ATT)</strong> framework. Explicit user consent is requested prior to using device identifiers (IDFA) for advertising purposes. You may modify or revoke these permissions at any time via <em>Settings &gt; Privacy &amp; Security &gt; Tracking</em>.</p>
+        </div>
 
         <h2>4. Log Data and Crash Diagnostics</h2>
-        <p>In the event of an error, bug, or crash while playing our games, diagnostic Log Data is collected automatically via standard developer tools (such as Firebase Crashlytics). This data may include device name, operating system version, app state at the time of the event, and basic performance metrics. This information is utilized solely to fix crashes and enhance game stability.</p>
+        <p>In the event of an application error or crash, diagnostic Log Data is automatically collected through tools such as Firebase Crashlytics. This data includes technical parameters such as device model, operating system version, and system state at the time of the crash, used strictly to optimize game performance.</p>
 
         <h2>5. Children's Privacy (COPPA Compliance)</h2>
-        <p>Protecting children using mobile devices and the internet is a fundamental commitment for us. We do not knowingly collect personal identifiable information from children under the age of 13. Where games are directed to families or children, we strictly adhere to COPPA (Children's Online Privacy Protection Act) guidelines and GDPR-K provisions, avoiding behavioral profiling or personalized ad tracking. If you believe your child has provided personal information to us, please reach out immediately and we will promptly remove the data.</p>
+        <p>Protecting children online is an essential duty. We do not knowingly collect personal identifiable information from children under the age of 13. Titles directed toward families or children strictly adhere to <strong>COPPA (Children's Online Privacy Protection Act)</strong> standards and avoid behavioral profiling.</p>
 
-        <h2>6. Data Security</h2>
-        <p>We value your trust and implement commercially acceptable physical and electronic practices to safeguard any data transmitted to or stored by our services. However, please remember that no method of transmission over the internet or electronic storage is completely infallible.</p>
+        <h2>6. Data Security and Retention</h2>
+        <p>We value your trust and implement commercially acceptable physical and electronic safeguards to protect any data collected. Data is retained only for the duration required to deliver and maintain our services.</p>
 
-        <h2>7. Changes to This Privacy Policy</h2>
-        <p>We may update our Privacy Policy periodically to reflect changes in our games, legal requirements, or store policies. Any modifications will be posted on this page with an updated revision date.</p>
+        <h2>7. User Rights and Data Deletion</h2>
+        <p>Users have the right to request access to, correction of, or permanent deletion of any associated data. You can exercise these rights at any time by contacting our support team.</p>
 
-        <h2>8. Contact Us</h2>
-        <p>If you have any questions, feedback, or requests regarding this Privacy Policy or your data rights, please contact us directly:</p>
+        <h2>8. Contact Information</h2>
+        <p>If you have any questions, inquiries, or data requests regarding this Privacy Policy, please contact us directly:</p>
         <ul>
-            <li><strong>Email:</strong> <a href="mailto:mfkgames.support@gmail.com">mfkgames.support@gmail.com</a></li>
+            <li><strong>Official Email:</strong> <a href="mailto:mfkgames.support@gmail.com">mfkgames.support@gmail.com</a></li>
             <li><strong>Website:</strong> <a href="https://mfkgames.github.io/" target="_blank">https://mfkgames.github.io/</a></li>
         </ul>
-
-        <footer>
-            <p>&copy; 2026 mFk Games — All rights reserved.</p>
-        </footer>
     </div>
+
+    <footer>
+        <p>&copy; 2026 mFk Games. All rights reserved. &bull; Tüm hakları saklıdır.</p>
+    </footer>
+</div>
+
+<script>
+function setLang(lang) {
+    var secTR = document.getElementById('section-tr');
+    var secEN = document.getElementById('section-en');
+    var btnTR = document.getElementById('btnTR');
+    var btnEN = document.getElementById('btnEN');
+    var backText = document.getElementById('backText');
+
+    if (lang === 'en') {
+        secTR.classList.remove('active');
+        secEN.classList.add('active');
+        btnTR.classList.remove('active');
+        btnEN.classList.add('active');
+        backText.textContent = 'Back to Home';
+        document.documentElement.lang = 'en';
+    } else {
+        secEN.classList.remove('active');
+        secTR.classList.add('active');
+        btnEN.classList.remove('active');
+        btnTR.classList.add('active');
+        backText.textContent = 'Ana Sayfaya Dön';
+        document.documentElement.lang = 'tr';
+    }
+}
+</script>
+
 </body>
 </html>
