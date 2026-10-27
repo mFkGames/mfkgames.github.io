@@ -1,71 +1,58 @@
-# mFk Games
+<p align="center">
+  <img src="og-image.png" alt="mFk Games" width="100%" style="max-width: 720px; border-radius: 8px;" />
+</p>
 
-Official web repository and distribution hub for **mFk Games**.
+<h1 align="center">mFk Games</h1>
+
+<p align="center">
+  <strong>Independent Mobile Game Studio &bull; Bağımsız Mobil Oyun Geliştiricisi</strong><br>
+  Crafting minimalist retro, 2D/3D pixel art, and arcade experiences for mobile platforms.
+</p>
+
+<p align="center">
+  <a href="https://mfkgames.github.io/">Official Website</a> &bull;
+  <a href="https://play.google.com/store/apps/developer?id=mFk+Games">Google Play</a> &bull;
+  <a href="https://apps.apple.com">App Store (Coming Soon)</a>
+</p>
 
 ---
 
-## English
-
 ### About the Studio
-**mFk Games** is an independent mobile game development studio focused on creating retro-inspired 2D/3D pixel art, arcade, and casual titles. We oversee the entire lifecycle of our projects—from visual concept and mechanics design to programming and publishing.
+**mFk Games** is an independent game development studio creating engaging, nostalgic, and lightweight games for mobile platforms. Every project—from original concept, visual pixel art, and gameplay mechanics to complete source code and deployment—is independently produced and published.
 
-* **Website:** https://mfkgames.github.io/
-* **Google Play:** https://play.google.com/store/apps/developer?id=mFk+Games
-* **Apple App Store:** Coming Soon
+* **Website:** [mfkgames.github.io](https://mfkgames.github.io/)
+* **Contact & Support:** [mfkgames.support@gmail.com](mailto:mfkgames.support@gmail.com)
 
-### Mobile Titles
-Our portfolio includes arcade, puzzle, strategy, and casual experiences designed for mobile platforms:
-* **Arcade & Retro:** Breakout, Sky Strike, Sky Defender, Neon Cave, Void Runner, Destan
-* **Puzzle & Strategy:** ChessBorn, TownCraft, Locked, ForceNeo, TurfWars
-* **Casual & Simulation:** mFk Farm, NikoX, Kahve Falı, Astroficyus
+---
+
+### Featured Mobile Titles
+A selective catalog of arcade, strategy, simulation, and retro titles:
+
+* **Arcade & Action:** *Breakout*, *Sky Strike*, *Sky Defender*, *Neon Cave*, *Void Runner*, *Destan*
+* **Strategy & Puzzle:** *ChessBorn*, *TownCraft*, *Locked*, *ForceNeo*, *TurfWars*
+* **Casual & Simulation:** *mFk Farm*, *NikoX*, *Kahve Falı*, *Astroficyus*
+
+---
 
 ### Official Channels
-* **YouTube:** https://www.youtube.com/@mFkGamesStudio
-* **X (Twitter):** https://x.com/mfkgamesstudio
-* **Instagram:** https://www.instagram.com/mfkgamess
-* **TikTok:** https://www.tiktok.com/@mfkgamesstudio
+Follow for updates, announcements, and release notes:
 
-### Legal & Compliance
-Publicly hosted compliance documentation for mobile app store guidelines:
+* **YouTube:** [@mFkGamesStudio](https://www.youtube.com/@mFkGamesStudio)
+* **X (Twitter):** [@mfkgamesstudio](https://x.com/mfkgamesstudio)
+* **Instagram:** [@mfkgamess](https://www.instagram.com/mfkgamess)
+* **TikTok:** [@mfkgamesstudio](https://www.tiktok.com/@mfkgamesstudio)
+
+---
+
+### Legal & Store Compliance
+Mandatory store compliance documentation hosted via GitHub Pages:
+
 * [Privacy Policy](https://mfkgames.github.io/privacy-policy.html)
 * [Terms of Service](https://mfkgames.github.io/terms-of-service.html)
 * [App-Ads.txt](https://mfkgames.github.io/app-ads.txt)
 
-### Contact
-* **Support & Inquiries:** mfkgames.support@gmail.com
-
 ---
 
-## Türkçe
-
-### Stüdyo Hakkında
-**mFk Games**, bağımsız bir mobil oyun geliştiricisidir. Mobil platformlar için 2D/3D piksel sanatı, retro atari ve gündelik oyunlar geliştirmeye odaklanmıştır. Görsel tasarım ve mekanik kurgusundan kodlama ve yayınlama süreçlerine kadar tüm geliştirme aşamaları bağımsız olarak yürütülmektedir.
-
-* **Web Sitesi:** https://mfkgames.github.io/
-* **Google Play:** https://play.google.com/store/apps/developer?id=mFk+Games
-* **Apple App Store:** Çok Yakında
-
-### Mobil Oyunlar
-Mobil platformlar için geliştirilen arcade, bulmaca, strateji ve gündelik projelerimiz:
-* **Arcade & Retro:** Breakout, Sky Strike, Sky Defender, Neon Cave, Void Runner, Destan
-* **Bulmaca & Strateji:** ChessBorn, TownCraft, Locked, ForceNeo, TurfWars
-* **Gündelik & Simülasyon:** mFk Farm, NikoX, Kahve Falı, Astroficyus
-
-### Resmi Kanallar
-* **YouTube:** https://www.youtube.com/@mFkGamesStudio
-* **X (Twitter):** https://x.com/mfkgamesstudio
-* **Instagram:** https://www.instagram.com/mfkgamess
-* **TikTok:** https://www.tiktok.com/@mfkgamesstudio
-
-### Yasal Belgeler ve Mağaza Uyumluluğu
-Mobil uygulama mağazası (Google Play ve App Store) yönergeleri doğrultusunda barındırılan yasal belgeler:
-* [Gizlilik Politikası (Privacy Policy)](https://mfkgames.github.io/privacy-policy.html)
-* [Hizmet Şartları (Terms of Service)](https://mfkgames.github.io/terms-of-service.html)
-* [App-Ads.txt](https://mfkgames.github.io/app-ads.txt)
-
-### İletişim
-* **Destek ve İletişim:** mfkgames.support@gmail.com
-
----
-
-© 2026 mFk Games. All rights reserved.
+<p align="center">
+  <sub>&copy; 2026 mFk Games. All rights reserved.</sub>
+</p>

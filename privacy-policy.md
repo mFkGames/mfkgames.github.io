@@ -1,22 +1,26 @@
-# Privacy Policy
+# Privacy Policy — mFk Games
 
-## Information We Collect
-We may collect basic information such as device data, usage statistics, and optional user-provided information.
+*Last updated: October 27, 2026*
 
-## How We Use Information
-Information is used to improve app functionality, performance, and user experience.
+This document outlines the privacy practices of **mFk Games** across our website ([mfkgames.github.io](https://mfkgames.github.io/)) and mobile applications available on Google Play and Apple App Store.
 
-## Data Sharing
-We do not sell or share personal data with third parties except when required by law.
+## 1. Information Collection
+We do not collect personal identifiable information directly on our website. Our mobile applications integrate industry-standard SDKs for analytics, crash reports, and advertisements.
 
-## Cookies
-We may use cookies or similar technologies to enhance functionality.
+## 2. Third-Party Service Providers
+Our apps may integrate:
+* **Apple App Store Services:** https://www.apple.com/legal/privacy/
+* **Google Play Services:** https://www.google.com/policies/privacy/
+* **Google AdMob:** https://support.google.com/admob/answer/6128543
+* **Firebase Analytics & Crashlytics:** https://firebase.google.com/support/privacy
 
-## Data Security
-We take reasonable measures to protect user data.
+## 3. Apple iOS & App Tracking Transparency (ATT)
+For iOS users, we comply with Apple's App Tracking Transparency framework and do not collect IDFA without explicit user consent.
 
-## User Rights
-Users may request data deletion or access by contacting us.
+## 4. Children's Privacy (COPPA)
+We do not knowingly collect personal data from children under 13 and adhere strictly to COPPA guidelines.
 
-## Contact
-For privacy questions, contact: mfkgames.support@gmail.com
+## 5. Contact
+For any privacy questions or requests:
+* **Email:** mfkgames.support@gmail.com
+* **Website:** https://mfkgames.github.io/
