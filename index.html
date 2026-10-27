@@ -713,8 +713,33 @@ var cardT={
  hot:{tr:"POPÜLER",en:"HOT GAME",de:"BELIEBT",fr:"POPULAIRE",es:"POPULAR",it:"POPOLARE",pt:"POPULAR",ru:"ХИТ",ja:"人気",ar:"شائع"}
 };
 
+// ── MAĞAZA: cihaza göre ──
+var APPLE_URL='https://apps.apple.com'; // TEK YER: Apple geliştirici linkini buraya yazın
+var UA=navigator.userAgent||'';
+var isIOS=/iPad|iPhone|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+var isAndroid=/Android/i.test(UA);
+
+// ── 15 iOS OYUNU (iPhone / iPad kullanıcıları için) ──
+var iosGames=[
+  {title:"Kahve Falı",pkg:"com.mfk.kahvefali",iosUrl:""},
+  {title:"Astroficyus",pkg:"com.mfk.astroficyus",iosUrl:""},
+  {title:"TownCraft",pkg:"com.mfk.towncraft",iosUrl:""},
+  {title:"TurfWars",pkg:"com.mfk.TurfWars",iosUrl:""},
+  {title:"Breakout",pkg:"com.mfk.breakout",iosUrl:""},
+  {title:"Locked",pkg:"com.mfk.locked",iosUrl:""},
+  {title:"Chessborn",pkg:"com.mfk.chessborn",iosUrl:""},
+  {title:"ForceNeo",pkg:"com.mfk.forceneo",iosUrl:""},
+  {title:"Oyun Sepeti",pkg:"com.mfk.oyunsepeti",iosUrl:""},
+  {title:"Nefes",pkg:"com.mfk.nefes",iosUrl:""},
+  {title:"Nexusbot",pkg:"com.mfk.nexusbot",iosUrl:""},
+  {title:"mFk Farm",pkg:"com.mfk.mfkfarm",iosUrl:""},
+  {title:"Neon Cave",pkg:"com.mfk.neoncave",iosUrl:""},
+  {title:"NikoX",pkg:"com.mfk.nikox",iosUrl:""},
+  {title:"Rider Protocol",pkg:"com.mfk.raiderprotocol",iosUrl:""}
+].map(function(g){return{title:g.title,pkg:g.pkg,category:'oyun',icon:ICON_BASE+g.pkg+'.png',iosUrl:g.iosUrl}});
+
 // ── KART SİSTEMİ: oyun karta bağlı, renk slota bağlı ──
-var loadedGames=fallbackGames.slice();
+var loadedGames=(isIOS?iosGames:fallbackGames).slice();
 var cards=['screenTop','screenCenter','screenBottom'].map(function(id){return document.getElementById(id)});
 var slotNames=['top','center','bottom'];
 var slotOfPos=['center','bottom','top']; // 0=en ön, 1=orta, 2=en arka
@@ -728,11 +753,6 @@ function fixPkg(p){
   var m=/^com\.mfk\.(.+)$/.exec(p||'');
   return (m&&PKG_CASE[m[1].toLowerCase()])?'com.mfk.'+PKG_CASE[m[1].toLowerCase()]:(p||'');
 }
-// ── MAĞAZA: cihaza göre ──
-var APPLE_URL='https://apps.apple.com'; // TEK YER: Apple geliştirici linkini buraya yazın
-var UA=navigator.userAgent||'';
-var isIOS=/iPad|iPhone|iPod/.test(UA)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
-var isAndroid=/Android/i.test(UA);
 var PALETTE=[
   {c:'#25f488',g:'rgba(37,244,136,.5)'},  // yeşil
   {c:'#00d2ff',g:'rgba(0,210,255,.4)'},   // mavi
@@ -744,7 +764,7 @@ function fillCard(sc,game,gi){
   var pc=PALETTE[(gi||0)%PALETTE.length];
   sc.style.setProperty('--c',pc.c);sc.style.setProperty('--glow',pc.g);
   var img=sc.querySelector('.game-icon-img'),title=sc.querySelector('.arcade-title');
-  sc.href=isIOS?(game.ios||game.appStore||APPLE_URL):(game.url||game.link||game.playUrl||game.storeUrl||(game.pkg?'https://play.google.com/store/apps/details?id='+fixPkg(game.pkg):'https://play.google.com/store/apps/developer?id=mFk+Games'));
+  sc.href=isIOS?(game.iosUrl||game.ios||game.appStore||APPLE_URL):(game.url||game.link||game.playUrl||game.storeUrl||(game.pkg?'https://play.google.com/store/apps/details?id='+fixPkg(game.pkg):'https://play.google.com/store/apps/developer?id=mFk+Games'));
   title.textContent=game.title.toUpperCase();
   title.setAttribute('title',game.title);
   var list=[],p=fixPkg(game.pkg),i=0;
@@ -947,6 +967,7 @@ else if(consentSaved!=='no'){showConsent()}
 fetch('ads.json')
   .then(function(r){return r.json()})
   .then(function(d){
+    if(isIOS)return;
     if(!Array.isArray(d))return;
     var f=d.filter(function(x){return x.category==='oyun'&&x.pkg&&x.title});
     if(f.length>=3){
